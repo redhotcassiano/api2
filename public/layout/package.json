@@ -1,0 +1,17 @@
+{
+  "name": "NatalPraias ",
+  "version": "1.0.0",
+  "description": "Layout Natal Praias",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Everfly (Cassiano de Souza)",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-sass": "^3.0.0",
+    "gulp-watch": "^4.3.11"
+  }
+}

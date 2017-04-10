@@ -1,0 +1,17 @@
+{
+  "name": "api2",
+  "description": "Api sistema de booking Natalpraias",
+  "main": "index.js",
+  "authors": [
+    "Everfly - Cassiano de Souza"
+  ],
+  "license": "MIT",
+  "homepage": "https://everflyagencia.com.br",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,243 @@
+//Código da página dos passeios;
+@import ../assets/placas-precos
+main
+	background:
+		color: #f0f1f3
+	///////////////////////////////////////////////////
+	.links-pages
+		margin:
+			top: 25px
+			bottom: 25px
+
+	.left-container
+		+make-sm-column(12)
+		+make-md-column(8)
+		//Carrousel//
+		.carrousel-passeios
+			img
+				width: 100%
+				+img-responsive
+
+			.owl-nav
+				float: left
+				position: absolute
+				z-index: 999
+				margin-top: -40%
+				width: 100%
+				
+
+
+
+			.owl-prev
+				text-shadow: 5px 5px 5px rbga(0,0,0,0.5)
+				//box-shadow: 5px 5px 5px rgba(0,0,0,0.5)
+				font-size: 56px
+				float: left
+				opacity: 0.1
+				z-index: 100
+				position: absolute
+				margin:
+					left: 15px
+				&:hover
+					opacity: 1
+					color: $backgound_cinza
+
+			.owl-next
+				text-shadow: 5px 5px 5px rbga(0,0,0,0.5)				
+				font-size: 56px
+				float: right
+				opacity: 0.1
+				z-index: 100
+				position: absolute
+				margin:
+					left: 95%
+				&:hover
+					opacity: 1
+					color: $backgound_cinza
+		/////carrousel///////
+		
+		//*********************** //
+		.barra-title			
+			margin-bottom: 25px
+		.left-submargin		
+			float: left
+			+make-sm-column(12)
+			+make-md-column(7)
+			width: 100%
+			height: 60px
+			margin:
+				top: 10px
+				bottom: 10px
+			padding: 10px
+
+			h1
+				font-size: 34px;
+			
+
+		.right-submargin
+			float: right
+			+make-sm-column(12)
+			+make-md-column(5)
+			width: 100%
+			height: 60px
+			margin:
+				top: 10px
+				bottom: 10px
+			padding: 10px
+			////////////////////////////
+			.panel
+				background:
+					color: #fff
+				height: 80px
+			.price-panel
+				position: absolute
+				top: 2px
+				right: 11px
+				width: 280px
+				z-index: 8
+
+				.panel-body
+					position: relative
+					min-height: 80px
+					
+
+				.price-panel-content
+					position: absolute
+					bottom: 8px
+					right: 10px
+				h6
+					margin: 0
+					line-height: 13px
+					text-align: right
+				.text-muted
+					color: #8da1a8
+				h3
+					margin: 1px 0 0
+					font-size: 30px
+					text-align: right
+				small
+					font-size: 16px
+					color: inherit
+
+			.panel-default
+				boder-color: #fff
+
+			.week-booked
+				font-size: 12px
+				line-height: 14px
+				margin: 0
+				position: absolute
+				bottom: 15px
+
+				strong
+					font-size: 14px
+
+			.badge
+				z-index: 8
+				position: absolute
+				top: 6px
+				left: -8px
+				padding: 0 7px
+				border-radius: 0px !important
+				&:before
+					content: ''
+					top: 26px
+					left: 0
+					position: absolute
+					border: 4px solid #4e676f
+					border-left-color: transparent !important
+					border-bottom-color: transparent !important
+				&:after
+					content: ''
+					top: 0
+					right: -25px
+					position: absolute
+					border: 13px solid transparent 
+				strong
+					color: #fff
+					line-height: 26px
+					font-size: 14px
+					text-transform: uppercase
+					&:before
+						content: '\f02b'
+					    font-family: 'FontAwesome'
+					    margin-right: 5px
+					    float: left
+
+
+			.badge-mais-vendido
+				background:
+					color: #f02f22 !important
+				&:before
+					border-color: #c02a2c
+				&:after
+					border-left-color: #f02f22
+
+			.text-secundary
+				color: #394b51
+
+
+
+			.text-right
+				text-align: right
+
+			/////////////////////////////
+		.menu-tab
+			+make-sm-column(12)
+			+make-md-column(12)
+			width: 100%
+			margin:
+				top: 25px
+				bottom: 25px
+
+			nav
+				width: 90%
+
+				ul	
+			  		width: 90%
+			  		border-bottom: 2px solid #fff
+			.nav-stacked
+				li 
+					float: left
+					margin-left: 45px
+					border: 2px solid #fff
+					background:
+						color: #fff
+					
+					a 
+						&:hover
+							background:
+								color: #fff
+
+			.nav-pills
+				li
+		.active
+			background:
+				color: $cor_btn_acao !important
+			a 
+				color: #fff
+				background:
+					color: $cor_btn_acao !important
+
+	.container-tabs
+		background:
+			color: #fff
+		margin-top: 65px
+		padding: 10px
+		width: 96%
+					
+//////////////////////////////////////////////////////////////
+	/////////////////// Avaliações ////////////////////////////
+
+	.avaliacaoes_panel
+			width: 96%
+			background:
+				color: #fff
+			margin-top: 25px
+	//////////////////////////////////////////////////////
+	.right-container
+		+make-sm-column(12)
+		+make-md-column(4)
+		width: 100%
+		height: 1200px
+		

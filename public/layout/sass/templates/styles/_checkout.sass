@@ -1,0 +1,387 @@
+//checkout
+input::-webkit-input-placeholder  /* WebKit browsers */
+  		padding-left: 0px
+
+input::-moz-input-placeholder  /* WebKit browsers */
+  padding-left: 0px
+
+.header-checkout
+	height: 420px
+	width: 100%
+	font-size: 35px
+	.title_page_home
+		margin-top: 200px
+		font-size: 35px
+
+//Atividades
+.atividades
+	margin:
+		top: 35px
+		bottom: 35px
+
+
+.progressbar
+	counter-reset: step
+	
+	li
+		list-style-type: none
+		float: left
+		width: 33.33%
+		position: relative
+		text-align: center
+		font-weight: $bold
+		font-size: 16px		
+		&:after
+			content: ''
+			position: absolute
+			width: 100%
+			height: 5px
+			background:
+				color: #ddd
+			top: 22px
+			left: -50%
+			z-index: -1
+
+
+		&:before
+			content: counter(step)
+			counter-increment: step
+			width: 45px
+			height: 45px
+			line-height: 45px
+			font-size: 18px
+			border: 1px solid #ddd
+			display: block
+			text-align: center
+			margin: 0 auto 10px  auto
+			border-radius: 50%			
+			background:
+					color: #ddd
+			color: $branco
+
+		&:first-child
+			&:after
+				content: none
+
+
+	li.active
+		color: $azul_padrao
+
+		&:before
+			content: '\f00c'
+			font-family: 'FontAwesome'			
+			background:
+				color: $azul_padrao
+			border:
+				color: $azul_padrao
+
+	li.active + li:after
+		background-color: $azul_padrao
+
+	li.action
+		
+		&:before			
+			background:
+				color: $azul_padrao
+			border:
+				color: $azul_padrao
+
+//Fim das Atividades
+
+//Carrinho
+.carrinho
+	width: 100%
+	margin:
+		bottom: 25px
+
+	.titulo-session-carrinho
+		font-size: 22px
+		font-weight: $bold
+		margin:
+			bottom: 25px
+		.border
+			content: ''
+			width: 50px
+			height: 3px
+			background-color: $azul_padrao
+
+	.link
+		a 
+			margin:
+				left: 0
+			&:before
+				content: '\f053'
+				font-family: 'FontAwesome'
+				margin:
+					right: 10px		
+//Fim Carrinho
+
+//Código Promocional
+.cod-promocional
+	
+	.painel .painel-body .painel-left, .painel .painel-body .painel-right
+		+make-md-column(6)
+		min-height: 90px
+
+	.painel .painel-body .painel-left
+		h2 
+		  margin:
+		  		top: 15px
+		  line-height: 20px
+
+	.painel .painel-body .painel-right .input-promocional
+		+make-md-column(7)
+		margin:
+			top: 18px
+		line-height: 25px
+		input 
+			width: 70%
+			line-height: 25px
+			float: left
+
+		button
+			background:
+				color: $azul_claro
+			border-color: $azul_claro
+			border-radius: 2px
+
+
+
+	.painel .painel-body .painel-right .label-desconto, .painel .painel-body .painel-right .valor-desconto
+		+make-md-column(2)
+		float: right
+		text-align: right
+		margin:
+			top: 20px
+		line-height: 25px
+
+	.painel .painel-body .painel-right .label-desconto
+		font-weight: $bold
+		
+	.painel .painel-body .painel-right .valor-desconto
+		color: $azul_padrao
+		float: right
+
+//Fim Cod Promocional
+
+//Info Usuario
+.info-User
+	margin:
+		top: 25px
+
+	.title-user
+		font-weight: $bold
+		text-align: left
+
+		h2
+			span 
+				color: $azul_padrao
+
+	.painel
+		padding: 25px
+
+	.painel .painel-body .name, .painel .painel-body .lastname
+		+make-sm-column(12)
+		+make-md-column(6)
+
+	.painel .painel-body .email, .painel .painel-body .doc-user, .painel .painel-body .country
+		+make-sm-column(12)
+		+make-md-column(4)
+
+	.painel .painel-body .ddd-phone
+		+make-sm-column(6)
+		+make-md-column(1)
+	.painel .painel-body .phone
+		+make-sm-column(6)
+		+make-md-column(3)
+		margin:
+			top: 25px
+	.painel .painel-body .link-more-phone
+		+make-sm-column(6)
+		+make-md-column(3)
+		margin:
+			top: 28px
+		line-height: 28px
+
+		a 
+			&:before
+				content: '\f067'
+				font-family: 'FontAwesome'
+				margin:
+					right: 10px
+
+	.painel .painel-body .country
+		select 
+			width: 100%
+			border:
+				color: #ddd	
+
+//Fim Info Usuario
+
+//Informações Para Translado
+.info-translado
+	margin:
+		top: 25px
+
+	.title-translado
+		font-weight: $bold
+		text-align: left
+
+		h2
+			span 
+				color: $azul_padrao
+
+	.painel
+		padding: 25px
+
+	.painel .painel-body .passeio-translado, .painel .painel-body .not-translado
+		+make-md-column(3)
+
+	.painel .painel-body .input-translado
+		+make-md-column(6)
+
+	.painel .painel-body .passeio-translado
+		margin:
+			top: -25px
+		h2
+		 font-size: 18px
+		 font-weight: $bold
+
+		h3 
+			font-size: 14px
+
+	.painel .painel-body .not-translado
+		font-size: 14px
+		text-align: right
+		margin:
+			top: 20px
+		line-height: 25px
+		input
+			width: 25px
+			height: 25px
+			float: left
+//Fim Translado
+
+//Pagamento
+.pagamento 
+	margin:
+		top: 25px
+
+	.title-pagamento
+		+make-md-column(6)
+		font-weight: $bold
+		text-align: left
+		line-height: 25px
+		
+		h2
+			float: left
+			span 
+				color: $azul_padrao
+
+		img 
+			margin:
+				left: 5px
+				top: 25px
+	.seguro-img
+		+make-md-column(6)
+		img 
+			float: right
+
+	.painel
+		padding: 25px		
+	
+	.painel .painel-body 
+		
+		.number-card, .name-card, .card-info, .painel-total-venda
+			+make-sm-column(12)
+			+make-md-column(6)
+			+make-lg-column(6)
+
+		.card-info
+			.card-front
+				background: url(../../img/cc_frente_n.jpg) center center no-repeat
+				width: 380px
+				top: 0
+				left: 80px
+				border-radius: 10px
+				background-size: 100% 100%
+				overflow: hidden
+				position: absolute
+				z-index: 10
+				+transition(0.2s)
+				height: 205px
+
+				.number-card
+					float: left
+					font-size: 18px
+					color: $branco
+					width: 100%
+					margin:
+						top: 115px
+				.date-card
+					float: left
+					text-align: left
+					margin:
+						top: 125px
+
+
+			.card-back
+				display: none
+				background: url(../../img/cc_verso.jpg) center center no-repeat
+				width: 380px
+				top: 0
+				left: 80px
+				border-radius: 10px
+				background-size: 100% 100%
+				overflow: hidden
+				position: absolute
+				z-index: 10
+				+transition(0.2s)
+				height: 205px
+
+
+		.vaidate-card, .cod-secure-card, .parcelas
+				+make-sm-column(12)
+				+make-md-column(4)
+				+make-lg-column(4)
+
+		.painel-total-venda
+			font-size: 18px
+			//border-left: 1px solid #ddd
+			//border-top: 1px solid #ddd
+			.labels, .values
+				+make-sm-column(6)
+				+make-md-column(6)
+			.labels
+				color: $font_color1
+				text-align: left
+
+			.values
+				text-align: right
+
+				.desc, .total-painel
+					color: $azul_claro
+
+				.total-painel
+					font-weight: $bold
+
+			button
+				background: 
+					color: $cor_btn_acao
+				border-color: $cor_btn_acao
+				font-size: 25px
+				font-weight: $bold
+				margin:
+					top: 25px
+
+
+//Footer
+.footer-checkout
+	margin:
+		top: 25px
+	text-align: right
+	font-size: 12px
+
+.footer_init
+	margin:
+		top: 25px

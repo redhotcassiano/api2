@@ -1,0 +1,93 @@
+.footer_init
+	+clearfix
+	+make-sm-column(12)
+	//max-height: 250px
+	background:
+		color: $backgound_cinza
+
+	h4
+		font-size: 16px
+		font-weight: $bold
+
+	.footer-primary		
+		+make-sm-column(12)
+		display: block
+		margin:
+			top: 25px
+			bottom: 25px	
+		img 
+			float: left
+			width: 120px	
+
+		.info_contato, .certificados, .forma_pagamento
+		 	
+			float: left
+			margin-left: 55px !important
+			
+		.certificado
+			h4	
+			 text-align: center 
+			
+
+		.forma_pagamento
+			img 
+				width: 60px
+				margin:
+					top: 25px
+					left: 10px
+
+		.certificados_img
+				img 
+					width: 100px
+					margin:
+						top: 25px
+						left: 10px
+footer 	
+	
+	.footer_secund
+		+make-sm-column(12)
+		+make-md-column(12)
+		+clearfix
+		max-height: 50px
+		margin-top: 10px
+		background:
+			color: $branco
+		h4
+			font-size: 12px 
+			color: $font_color1
+			width: 450px;
+			margin:
+				top: 15px
+				bottom: 25px
+
+		.redesociais
+			width: 320px 
+			float: right
+			margin:
+				top: -45px
+				left: 40%
+				
+			color: $font_color1
+			a 
+				color: $font_color1
+				margin:
+					left: 10px
+				i 
+					font-size: 9px
+					
+					border: 1px solid $font_color1
+					+border-radius(120px)
+					padding: 5px
+					text-align: center
+					
+					width: 22px
+					height: 22px
+
+			+breakpoint($tablet)
+				display: inline-block				
+				
+
+
+		
+
+

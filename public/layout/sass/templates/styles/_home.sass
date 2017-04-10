@@ -1,0 +1,216 @@
+.filtros_home
+	  
+	height: 70px	
+	background:
+		color: $backgound_cinza
+
+	+breakpoint($tablet)
+		display: none
+
+	select, input
+		width: 200px
+		height: 40px
+		margin-top: 15px
+		margin-left: 20px
+		border: none
+
+		+breakpoint($tablet)
+			margin-left: 45px
+			margin-top: 10px
+
+
+	.btn-primary
+		background:
+			color: $cor_btn_acao
+		border: 1px solid $cor_btn_acao
+		height: 50px
+		height: 40px
+		text-align: center
+		font-weight: $regular
+		margin-left: 25px
+
+
+
+
+//Novidades****************
+h3
+	margin-left: 20px !important
+	font-weight: $bold
+
+section
+	+make-sm-column(12)
+	
+.border_title
+	width: 80px
+	height: 20px
+	border-bottom: 5px solid $azul_padrao
+	margin-left: 20px
+	margin-bottom: 25px   	
+
+.novidades_home
+	width: 100%
+	height 520px
+
+///Cards////
+.card_item
+	+flexbox
+	width: 320px
+	-webkit-box-shadow: 6px 6px 10px #999; 
+	-moz-box-shadow: 6px 6px 10px #999;
+	box-shadow: 6px 6px 10px #999;
+	float: left
+	margin-left: 25px
+	margin-bottom: 25px
+
+	+breakpoint($tablet)
+		+flexbox
+		width: 220px
+		-webkit-box-shadow: 6px 6px 10px #999; 
+		-moz-box-shadow: 6px 6px 10px #999;
+		box-shadow: 6px 6px 10px #999;
+		float: left
+		margin-left: 25px
+		margin-bottom: 25px
+
+	
+
+.card-top
+	img
+		width: 320px 
+		position: absolute
+		z-index: 2
+		float: right
+		+breakpoint($tablet)
+			width: 220px
+
+	a 	
+		width: 50px
+		position: absolute
+		z-index: 5
+		font-size: 25px
+		float: right
+		color: #000
+		margin-left: 290px
+    	margin-top: 15px 
+
+	.base_gostei
+		width: 60px
+		position: absolute
+		z-index: 4
+		float: right
+		margin-left: 263px
+		+breakpoint($tablet)
+			width: 30px		
+			margin-left: 195px
+
+
+.card-footer
+	text-align: center
+	width: 320px
+	float: right
+	position: relative
+	z-index: 12
+	margin-bottom: 50px
+	margin-top: 250px
+
+	.stars
+		font-size: 20px
+		color: #ffc205
+		margin-bottom: 10px
+
+	.title_passeio
+		font-size: 20px
+		margin-bottom: 25px
+		font-weight: $regular
+
+	.regiao_passeio
+		font-size: 18px
+		color: #bcbcbc
+		margin-bottom: 25px
+
+	.valor_passeio
+		font-size: 28px
+		color: #1ca4e0
+		font-weight: $bold
+		margin-bottom: 25px
+
+	.valor_comprados_home
+		border-top: 2px solid $backgound_cinza
+
+		i, span
+			margin-top: 25px
+	
+//////////////////////////////////////////////////////////////
+
+#newsletter
+	+clearfix
+	background:
+		image: url('../img/back_news.jpg')
+		position: top center
+		repeat: no-repeat
+		attachment: fixed		
+		size: cover
+
+	margin-top: 35px	
+	height: 200px
+	+breakpoint($tablet)
+		height: 250px
+
+
+	h3
+		margin-right: -200px
+		margin-top: 100px
+
+		+breakpoint($tablet)
+			margin: 0 auto
+			margin-top: 100px
+		
+
+
+	.cont-new
+		width: 400px
+		float: left
+		text-align: center
+		color: #fff
+
+	.cont-new-input
+		margin-left: 500px
+		+breakpoint($tablet)
+			margin: 0 auto
+
+		input
+			width: 400px
+			height: 40px
+			border: none
+
+			+breakpoint($tablet)
+				width: 200px
+
+		.btn-primary
+			background:
+				color: $azul_claro
+			border: none
+			width: 100px
+			margin-left: 0px
+			width: 90px
+			height: 40px
+			margin-top: -4px
+
+	.title-newsletter
+		font-size: 25px
+		margin-left: 20px
+		float: left
+		width: 100%
+		margin-bottom: 25px
+		color: #fff
+		margin-top: 25px
+		font-weight: $bold
+		+breakpoint($tablet)
+			width: 50%
+			margin: 0 auto
+			margin-left: 45%
+
+	.sub_title
+		width: 70px
+		margin-left: 20px
+		color: #fff

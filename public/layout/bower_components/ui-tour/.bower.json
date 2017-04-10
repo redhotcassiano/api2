@@ -1,0 +1,16 @@
+{
+  "name": "ui-tour",
+  "dependencies": {},
+  "devDependencies": {},
+  "homepage": "https://github.com/crisply/ui-tour",
+  "_release": "6ee10ad85c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "6ee10ad85c84ed2fca18e660530368e55b404338"
+  },
+  "_source": "https://github.com/crisply/ui-tour.git",
+  "_target": "*",
+  "_originalSource": "ui-tour",
+  "_direct": true
+}

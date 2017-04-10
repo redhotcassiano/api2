@@ -1,0 +1,161 @@
+.card-product-main
+	+clearfix
+	+make-sm-column(6)
+	//+make-md-column(8)
+	+make-lg-column(3)
+
+	a
+		border: none
+		box-shadow: 6px 6px 10px #999
+		-webkit-box-shadow: 6px 6px 10px #999 
+		-moz-box-shadow: 6px 6px 10px #999
+		-o-box-shadow: 6px 6px 10px #999
+
+
+	.product, .thumbnail
+		position: relative
+
+	.thumbnail
+		display: block
+		margin:
+			bottom: 25px
+		line-height: 1.42857
+		background: 
+			color: #fff	
+	//**************Badge********************//
+	.badge
+		position: absolute
+		top: -2px
+		left: -4px
+		padding: 0 7px
+		border-radius: 0px !important
+		strong
+			color: #fff
+			line-height: 26px
+			font-size: 14px
+			text-transform: uppercase;
+
+		&:before
+			content: ''
+			top: 26px
+			left: 0
+			position: absolute
+			border: 4px solid #4e676f
+			border-left-color: transparent !important
+			border-bottom-color: transparent !important
+
+		&:after
+			content: ''
+			top: 0
+			right: -26px
+			position: absolute
+			border: 13px solid transparent
+
+	.badge-mais-vendido
+		background:
+			color: #f02f22
+		&:before
+			border-color: #c02a2c
+		&:after
+			border-left-color: #f02f22
+	//********* END BADGE ***************//
+
+	//********* HEART LIST *************//
+	.heart-list
+		position: absolute
+		top: 0
+		right: 0
+
+		button
+			font-family: 'FontAwesome'
+			position: absolute
+			top: 7px
+			right: 4px
+			background: none
+			border: none
+			padding: 0 4px
+			outline: 0
+			font-size: 18px
+
+			&:before
+				content: '\f004'
+
+		.create-list
+			&:before
+				color: #ddd
+
+			&:hover
+
+				&:before
+					color: #ff5030
+
+		&:before
+			content: ''
+			position: absolute
+			right: 0
+			top: 0
+			border: 28px solid transparent
+			border-top-color: #fff
+			border-right-color: #fff
+	//********* END HEART LIST ************//
+
+	.caption
+		height: 295px
+		position: relative
+		padding: 12px
+		color: #394b51
+		text-align: center
+
+		.title
+			margin:
+				bottom: 25px			
+			font-size: 20px
+			font-weight: $regular
+			text-align: center
+
+		.regiao-passeio
+			font-size: 18px
+			color: $sub-titulo
+			margin:
+				bottom: 25px
+
+		.valor-passeio
+			font-size: 28px
+			color: $azul_padrao
+			font-weight: $bold
+			margin:
+				bottom: 25px
+
+		.comprados-semana-passeio
+			border-top: 2px solid $borda-passeio
+
+			i, span 
+				margin-top: 25px
+
+		.rating-stars
+			margin:
+				bottom: 10px
+			text-align: center
+			font-size: 20px
+			i 
+			  color: $star
+
+		.weekbooked
+			font-size: 12px
+			line-height: 14px
+			margin: 0
+			position: absolute
+			bottom: 10px
+
+			strong
+				font-size: 14px
+
+		.price	
+			position: absolute
+			bottom: 12px
+			right: 12px
+			text-align: right
+			margin:
+				bottom: -5px
+
+

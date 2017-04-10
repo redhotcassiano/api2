@@ -1,0 +1,79 @@
+/* ======== Cores */
+$azul_padrao:       #1ba3df
+$azul_claro:        #3ebcf6
+$backgound_cinza:   #f0f1f3
+$cor_btn_acao:      #ff7000
+$font_color1:       #66737b
+$font_color2:       #374b52
+$font_sub_titulo:   #555555
+$branco:            #fff
+$star:              #ffc205
+$sub-titulo:        #bcbcbc
+$borda-passeio:     #f0f1f3
+
+/* ======== Font */
+$light: 300
+$regular: 400
+$bold: 700
+
+$celular: max-width 440px
+$tablet: max-width 991px
+
+=shadow($deslocamento, $esfumacado, $diferenca, $cor)
+  box-shadow: $deslocamento $esfumacado $diferenca $cor;
+  -moz-box-shadow: $deslocamento $esfumacado $diferenca $cor;
+  -webkit-box-shadow: $deslocamento $esfumacado $diferenca $cor;
+
+
+=flexbox
+  display: -webkit-box
+  display: -webkit-flex
+  display: -moz-flex
+  display: -ms-flexbox
+  display: flex
+
+=gradient($angle,$gradient1, $gradient2)
+  background-color: $gradient2 
+  background-image: -webkit-gradient(linear, $angle, from($gradient1), to($gradient2))
+  background-image: -webkit-linear-gradient($angle, $gradient1, $gradient2)
+  background-image:    -moz-linear-gradient($angle, $gradient1, $gradient2)
+  background-image:     -ms-linear-gradient($angle, $gradient1, $gradient2)
+  background-image:      -o-linear-gradient($angle, $gradient1, $gradient2)
+  background-image:         linear-gradient($angle, $gradient1, $gradient2)
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=$angle,StartColorStr='#{$gradient1}', EndColorStr='#{$gradient2}')
+
+/* ======== Outros */
+=transition($transition...) 
+  -moz-transition:    all $transition linear
+  -o-transition:      all $transition linear
+  -webkit-transition: all $transition linear
+  transition:         all $transition linear
+
+=border-radius($radius) 
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  -ms-border-radius: $radius
+  border-radius: $radius
+
+@function calculateRem($size) 
+  $remSize: $size / 16px
+  @return $remSize * 1rem
+
+=font-size($size) 
+  font-size: $size
+  font-size: calculateRem($size)
+
+=opacity($opacity) 
+  opacity: $opacity
+  $opacity-ie: $opacity * 100
+  filter: alpha(opacity=$opacity-ie)
+
+/* ======== Background Color Opacity */
+=background-opacity($color: #000, $opacity: 0.85) 
+  background: $color
+  background: rgba($color, $opacity)
+
+/* ======== Columns */
+=columns($count: 3, $gap: 10) 
+  @include css3-prefix('column-count', $count)
+  @include css3-prefix('column-gap', $gap)
