@@ -74,6 +74,15 @@
 
 		getToursNews();
 		
+		$scope.toursSearch = [
+			{name: "Passeio em Pipa", id_tour: 12},
+			{name: "Passeio em Miranda", id_tour: 22 },
+			{name: "Praia de Marataui", id_tour: 55}
+		];
+
+		$scope.searchNow = function(data){
+			console.log(data.originalObject.id_tour);
+		}
 
 
 

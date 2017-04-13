@@ -35,6 +35,7 @@
 	<link rel="stylesheet" href="{{ url('app/vendors/ng-notify/dist/ng-notify.min.css') }}">
 	<script src="{{ url('app/vendors/ng-notify/dist/ng-notify.min.js') }}"></script>
 	<script src="{{ url('layout/js/vendors/angular-rateit/dist/ng-rateit.min.js') }}"></script>
+	<script src="{{ url('app/vendors/angular-autocomplete/angucomplete-alt.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/angular-rateit/dist/ng-rateit.css') }}">
 	
 	<script src="{{ url('layout/js/app/app.js') }}"></script>
@@ -90,6 +91,24 @@
 		.not-cart p > span{
 			font-size: 18px;
 			font-weight: bold;
+		}
+
+		.angucomplete-dropdown{
+			background-color: #fff !important;
+			width: 40% !important;
+			cursor: pointer;
+			margin: 0 auto;
+			margin-top: 2px;
+			z-index: 100;
+			position: relative;
+		}
+
+		header .search_home button {
+		    height: 42px;
+		    margin-top: -1px !important;
+		    margin-left: 200px !important;
+		    width: 70px;
+		    position: absolute;
 		}
 
 		
@@ -187,9 +206,22 @@
 			<div class="title_page_home">
 				<h2> @{{ home.subtitle_home }} </h2>
 				<h1> @{{ home.title_home }} </h1>
+				
 				<div class="search_home">
-					<input class="input_procurar_home" type="text" placeholder="Para onde você vai viajar?">			
-				    <button class="btn btn-primary-home"><i class="fa fa-search" aria-hidden="true"></i></button>
+					<button class="btn btn-primary-home" ng-click="searchNow(tourSearch)"><i class="fa fa-search" aria-hidden="true"></i></button>
+					<angucomplete-alt id="ex1"
+		              placeholder="Para onde você vai viajar?"
+		              pause="100"
+		              selected-object="tourSearch"
+		              local-data="toursSearch"
+		              search-fields="name"
+		              title-field="name"
+		              description-field="Pesquisar Passeio"
+		              minlength="1"
+		              input-class="input_procurar_home"
+		              ></angucomplete-alt>              
+					<!--<input class="input_procurar_home" type="text" placeholder="Para onde você vai viajar?">	-->
+				    
 				</div>				
 			</div>		
 		</div>
@@ -231,8 +263,56 @@
 				<div class="container">
 					<div class="row">
 						<!--- Area Test -->
-						<div ng-repeat="tourN in toursNews.tours">
-							<div>@{{tourN}}</div>
+						<div ng-repeat="tourN in toursNews.tours">							
+							<article class="card-product-main">
+								<a href="tour/@{{tourN.slug_tour}}" class="product thumbnail" title="passeio natal" alt="passeio natal">
+									<!-- Badges -->
+									<div class="badge badge-mais-vendido">
+										<strong>
+											Mais Vendido
+										</strong>
+									</div>
+									<!--************-->
+									<!-- heart list -->
+									<div class="heart-list">
+										<button class="tip create-list"></button>
+									</div>
+									<!--*****************-->
+									<!-- Image Passeio -->
+									<div ng-repeat="img in toursNews.imgs">
+										<div ng-if="img.token_tour == tourN.token_tour">		
+											<img src="img/@{{img.name}}" class="" alt="passeio natal" width="313" height="195" style="width: 313px !important;">
+										</div>										
+									</div>
+									
+									<!--***************-->
+									<!-- Caption -->
+									<div class="caption">
+										<div class="rating-stars">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star-o"></i>
+										</div>
+										<div class="title">
+											@{{tourN.title_tour}}
+										</div>
+										<div class="regiao-passeio">
+											Natal - Brasil
+										</div>
+										<div class="valor-passeio"> R$ @{{tourN.price_cost}}</div>
+										<div class="comprados-semana-passeio">
+											<i class="fa fa-users"></i>
+											<span>38 Comprados na última semana</span>
+										</div>										
+										
+									</div>
+									<!--*********-->
+
+								</a>
+							</article>
+							
 						</div>
 						<!--- /Area Test -->								
 						<article class="card-product-main">

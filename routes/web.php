@@ -14,6 +14,11 @@ Route::get('/', function () {
 	 return view('demo');
 });
 
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    return redirect('/');
+});
+
 Route::get('loja', function () {
 	 return view('ecommerce/home');
 });
