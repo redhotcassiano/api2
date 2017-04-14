@@ -142,4 +142,17 @@ class PageHomeController extends Controller
         $toursNew = $this->tours->allToursNews();
         return $toursNew;
     }
+
+    public function getSearch(){
+        $search = $this->tours->all();
+
+            for ($i=0; $i < $search->count() ; $i++) { 
+                $res[$i]['name'] = $search[$i]['title_tour'];
+                $res[$i]['slug'] = $search[$i]['slug_tour'];
+            }
+                
+           
+
+        return $res;
+    }
 }

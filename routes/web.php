@@ -99,7 +99,8 @@ Route::group(['prefix' => 'v1'], function(){
 	//Home-Page
 	Route::get('home-page', 'PageHomeController@index');
 	Route::get('home-page/{id}', 'PageHomeController@show');
-	Route::get('getnewstours', 'PageHomeController@getToursNews');	
+	Route::get('getnewstours', 'PageHomeController@getToursNews');
+	Route::get('getSearch', 'PageHomeController@getSearch');
 	Route::post('home-page', 'PageHomeController@create');
 	Route::get('home-page/cart/{ip}', 'PageHomeController@createCart');
 	Route::put('home-page/{id}', 'PageHomeController@update');

@@ -66,22 +66,29 @@
 				console.log('Tours: '+response.data);
 				$scope.toursNews = response.data;
 
-
 			}, function onError(response){
 				$scope.toursNews = null;
 			});
 		};
 
 		getToursNews();
+
+		var GetSearch = function(){
+			homeService.getSearch().then(function onSucess(response){
+				console.log('Search: '+response.data);
+				$scope.toursSearch = response.data;
+
+			}, function onError(response){
+				$scope.toursSearch = null;
+			});
+		};
 		
-		$scope.toursSearch = [
-			{name: "Passeio em Pipa", id_tour: 12},
-			{name: "Passeio em Miranda", id_tour: 22 },
-			{name: "Praia de Marataui", id_tour: 55}
-		];
+		GetSearch();
 
 		$scope.searchNow = function(data){
-			console.log(data.originalObject.id_tour);
+			console.log(data.originalObject.slug);
+			$slug = data.originalObject.slug;
+			window.location = "{{ url('/tour') }}/"+ $slug;
 		}
 
 

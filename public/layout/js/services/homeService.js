@@ -3,17 +3,7 @@ angular.module("home").factory('homeService',function($http) {
 		lista: function(){
 			return $http.get('/v1/tours');
 		},
-		cadastra: function(data){
-			return $http.post('/v1/tours', data);
-		},
-		edita: function(data){
-			var id = data.id;
-			delete data.id;
-			return $http.put('/v1/tours/'+id, data);
-		},
-		exclui: function(id){
-			return $http.delete('/v1/tours/'+id);
-		},
+				
 		getImgs: function(token){
 			return $http.get('/v1/tours/imgs/'+token);
 		},
@@ -34,24 +24,12 @@ angular.module("home").factory('homeService',function($http) {
 			return $http.post('/web/cart', data);
 		},
 
-		updatePriceCart: function(id, total){
-			return $http.put('/web/cart/'+id+'/'+total);
-		},
-
 		cadastraTourCart: function(data){
 			return $http.post('/web/listcart', data);
 		},
 		
 		getSession: function(name_session){
 			return $http.get('/session/get/'+name_session);
-		},
-
-		getComments: function(idTour){
-			return $http.get('/v1/tours/comments/'+idTour);
-		},
-
-		saveComments: function(data){
-			return $http.post('/web/comments', data);
 		},
 
 		getHome: function(){
@@ -64,6 +42,10 @@ angular.module("home").factory('homeService',function($http) {
 		//carregar os tours;
 		getToursNews: function(){
 			return $http.get('/v1/getnewstours');
+		},
+
+		getSearch: function(){
+			return $http.get('/v1/getSearch');
 		}
 	}
 
