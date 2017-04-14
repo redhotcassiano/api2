@@ -102,5 +102,15 @@ class TourInfoController extends Controller
     		return $banner;
     	}
     }
+
+    public function updateViews($id, $views){
+    	$tour = $this->tours->updateViews($id, $view);
+    	if($tour != null):
+    		return $tour;
+    	else:
+    		return false;
+    	endif;
+
+    }
     
 }

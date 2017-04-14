@@ -228,6 +228,7 @@
 		<!-- Fim do containner -->
 
 	</header>
+	
 	<!-- Fim do Header -->
 	<!-- Inicio do Main -->
 	<main>
@@ -314,137 +315,7 @@
 							</article>
 							
 						</div>
-						<!--- /Area Test -->								
-						<article class="card-product-main">
-							<a href="#" class="product thumbnail" title="passeio natal" alt="passeio natal">
-								<!-- Badges -->
-								<div class="badge badge-mais-vendido">
-									<strong>
-										Mais Vendido
-									</strong>
-								</div>
-								<!--************-->
-								<!-- heart list -->
-								<div class="heart-list">
-									<button class="tip create-list"></button>
-								</div>
-								<!--*****************-->
-								<!-- Image Passeio -->
-								<img src="{{ url('layout/img/passeios.jpg') }}" class="" alt="passeio natal" width="393" height="195">
-								<!--***************-->
-								<!-- Caption -->
-								<div class="caption">
-									<div class="rating-stars">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<div class="title">
-										Passeio Natal Praias
-									</div>
-									<div class="regiao-passeio">
-										Natal - Brasil
-									</div>
-									<div class="valor-passeio"> R$ 60,00</div>
-									<div class="comprados-semana-passeio">
-										<i class="fa fa-users"></i>
-										<span>38 Comprados na última semana</span>
-									</div>										
-									
-								</div>
-								<!--*********-->
-
-							</a>
-						</article>
-						<!--******************-->
-						<article class="card-product-main">
-							<a href="#" class="product thumbnail" title="passeio natal" alt="passeio natal">
-								<!-- Badges -->
-								<div class="badge badge-mais-vendido">
-									<strong>
-										Mais Vendido
-									</strong>
-								</div>
-								<!--************-->
-								<!-- heart list -->
-								<div class="heart-list">
-									<button class="tip create-list"></button>
-								</div>
-								<!--*****************-->
-								<!-- Image Passeio -->
-								<img src="{{ url('layout/img/passeios.jpg') }}" class="" alt="passeio natal" width="393" height="195">
-								<!--***************-->
-								<!-- Caption -->
-								<div class="caption">
-									<div class="rating-stars">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<div class="title">
-										Passeio Natal Praias
-									</div>
-									<div class="regiao-passeio">
-										Natal - Brasil
-									</div>
-									<div class="valor-passeio"> R$ 60,00</div>
-									<div class="comprados-semana-passeio">
-										<i class="fa fa-users"></i>
-										<span>38 Comprados na última semana</span>
-									</div>										
-									
-								</div>
-								<!--*********-->
-
-							</a>
-						</article>
-						<article class="card-product-main">
-							<a href="#" class="product thumbnail" title="passeio natal" alt="passeio natal">
-								<!-- Badges -->
-								<div class="badge badge-mais-vendido">
-									<strong>
-										Mais Vendido
-									</strong>
-								</div>
-								<!--************-->
-								<!-- heart list -->
-								<div class="heart-list">
-									<button class="tip create-list"></button>
-								</div>
-								<!--*****************-->
-								<!-- Image Passeio -->
-								<img src="{{ url('layout/img/passeios.jpg') }}" class="" alt="passeio natal" width="393" height="195">
-								<!--***************-->
-								<!-- Caption -->
-								<div class="caption">
-									<div class="rating-stars">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<div class="title">
-										Passeio Natal Praias
-									</div>
-									<div class="regiao-passeio">
-										Natal - Brasil
-									</div>
-									<div class="valor-passeio"> R$ 60,00</div>
-									<div class="comprados-semana-passeio">
-										<i class="fa fa-users"></i>
-										<span>38 Comprados na última semana</span>
-									</div>										
-									
-								</div>
-								<!--*********-->
-
-							</a>
-						</article>
+						<!--- /Area Test -->					
 
 					</div>
 				</div>
@@ -461,137 +332,58 @@
 				<div class="border_title"></div>
 				<!-- Inicio da Section de Cards -->
 				<div class="container">
-					<div class="row">								
-						<article class="card-product-main">
-							<a href="#" class="product thumbnail" title="passeio natal" alt="passeio natal">
-								<!-- Badges -->
-								<div class="badge badge-mais-vendido">
-									<strong>
-										Mais Vendido
-									</strong>
-								</div>
-								<!--************-->
-								<!-- heart list -->
-								<div class="heart-list">
-									<button class="tip create-list"></button>
-								</div>
-								<!--*****************-->
-								<!-- Image Passeio -->
-								<img src="{{ url('layout/img/passeios.jpg') }}" class="" alt="passeio natal" width="393" height="195">
-								<!--***************-->
-								<!-- Caption -->
-								<div class="caption">
-									<div class="rating-stars">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
+					<div class="row">
+						<div ng-repeat="tourV in toursViews.tours">							
+							<article class="card-product-main">
+								<a href="tour/@{{tourV.slug_tour}}" class="product thumbnail" title="passeio natal" alt="passeio natal">
+									<!-- Badges -->
+									<div class="badge badge-mais-vendido">
+										<strong>
+											Mais Vendido
+										</strong>
 									</div>
-									<div class="title">
-										Passeio Natal Praias
+									<!--************-->
+									<!-- heart list -->
+									<div class="heart-list">
+										<button class="tip create-list"></button>
 									</div>
-									<div class="regiao-passeio">
-										Natal - Brasil
+									<!--*****************-->
+									<!-- Image Passeio -->
+									<div ng-repeat="img in toursViews.imgs">
+										<div ng-if="img.token_tour == tourV.token_tour">		
+											<img src="img/@{{img.name}}" class="" alt="passeio natal" width="313" height="195" style="width: 313px !important;">
+										</div>										
 									</div>
-									<div class="valor-passeio"> R$ 60,00</div>
-									<div class="comprados-semana-passeio">
-										<i class="fa fa-users"></i>
-										<span>38 Comprados na última semana</span>
-									</div>										
 									
-								</div>
-								<!--*********-->
+									<!--***************-->
+									<!-- Caption -->
+									<div class="caption">
+										<div class="rating-stars">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star-o"></i>
+										</div>
+										<div class="title">
+											@{{tourV.title_tour}}
+										</div>
+										<div class="regiao-passeio">
+											Natal - Brasil
+										</div>
+										<div class="valor-passeio"> R$ @{{tourV.price_cost}}</div>
+										<div class="comprados-semana-passeio">
+											<i class="fa fa-users"></i>
+											<span>38 Comprados na última semana</span>
+										</div>										
+										
+									</div>
+									<!--*********-->
 
-							</a>
-						</article>
-						<!--******************-->
-						<article class="card-product-main">
-							<a href="#" class="product thumbnail" title="passeio natal" alt="passeio natal">
-								<!-- Badges -->
-								<div class="badge badge-mais-vendido">
-									<strong>
-										Mais Vendido
-									</strong>
-								</div>
-								<!--************-->
-								<!-- heart list -->
-								<div class="heart-list">
-									<button class="tip create-list"></button>
-								</div>
-								<!--*****************-->
-								<!-- Image Passeio -->
-								<img src="{{ url('layout/img/passeios.jpg') }}" class="" alt="passeio natal" width="393" height="195">
-								<!--***************-->
-								<!-- Caption -->
-								<div class="caption">
-									<div class="rating-stars">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<div class="title">
-										Passeio Natal Praias
-									</div>
-									<div class="regiao-passeio">
-										Natal - Brasil
-									</div>
-									<div class="valor-passeio"> R$ 60,00</div>
-									<div class="comprados-semana-passeio">
-										<i class="fa fa-users"></i>
-										<span>38 Comprados na última semana</span>
-									</div>										
-									
-								</div>
-								<!--*********-->
-
-							</a>
-						</article>
-						<article class="card-product-main">
-							<a href="#" class="product thumbnail" title="passeio natal" alt="passeio natal">
-								<!-- Badges -->
-								<div class="badge badge-mais-vendido">
-									<strong>
-										Mais Vendido
-									</strong>
-								</div>
-								<!--************-->
-								<!-- heart list -->
-								<div class="heart-list">
-									<button class="tip create-list"></button>
-								</div>
-								<!--*****************-->
-								<!-- Image Passeio -->
-								<img src="{{ url('layout/img/passeios.jpg') }}" class="" alt="passeio natal" width="393" height="195">
-								<!--***************-->
-								<!-- Caption -->
-								<div class="caption">
-									<div class="rating-stars">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<div class="title">
-										Passeio Natal Praias
-									</div>
-									<div class="regiao-passeio">
-										Natal - Brasil
-									</div>
-									<div class="valor-passeio"> R$ 60,00</div>
-									<div class="comprados-semana-passeio">
-										<i class="fa fa-users"></i>
-										<span>38 Comprados na última semana</span>
-									</div>										
-									
-								</div>
-								<!--*********-->
-
-							</a>
-						</article>
+								</a>
+							</article>
+							
+						</div>					
 
 					</div>
 				</div>
@@ -608,9 +400,13 @@
 				<div class="cont-new">
 					<span class="sub_title">Receba as melhores dicas de passeios e atrações para a sua viagem no seu e-mail!</span>
 				</div>
+				<form>
 				<div class="cont-new-input">
-					<input type="text" placeholder="Informe seu e-mail"><button class="btn btn-primary">Enviar</button>
-				</div>			
+					<input type="email" name="n_email" id="n_email" placeholder="Informe seu e-mail" ng-model="newEmail.n_email">
+					<input type="hidden" name="status" id="status" ng-model="newEmail.status" value="@{{newEmail.status = 1}}">
+					<button class="btn btn-primary" ng-click="saveNewEmail(newEmail)">Enviar</button>
+				</div>		
+				</form>	
 			</div>			
 		</section>
 	</main>

@@ -143,6 +143,11 @@ class PageHomeController extends Controller
         return $toursNew;
     }
 
+    public function getToursViews(){
+        $toursViews = $this->tours->allToursViews();
+        return $toursViews;
+    }
+
     public function getSearch(){
         $search = $this->tours->all();
 

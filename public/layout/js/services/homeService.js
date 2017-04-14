@@ -44,9 +44,17 @@ angular.module("home").factory('homeService',function($http) {
 			return $http.get('/v1/getnewstours');
 		},
 
+		getToursViews: function(){
+			return $http.get('/v1/getToursViews');
+		},
+
 		getSearch: function(){
 			return $http.get('/v1/getSearch');
-		}
+		},
+
+		saveNewEmail: function(data){
+			return $http.post('/v1/emails', data);
+		},
 	}
 
 });

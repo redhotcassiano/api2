@@ -100,6 +100,7 @@ Route::group(['prefix' => 'v1'], function(){
 	Route::get('home-page', 'PageHomeController@index');
 	Route::get('home-page/{id}', 'PageHomeController@show');
 	Route::get('getnewstours', 'PageHomeController@getToursNews');
+	Route::get('getToursViews', 'PageHomeController@getToursViews');
 	Route::get('getSearch', 'PageHomeController@getSearch');
 	Route::post('home-page', 'PageHomeController@create');
 	Route::get('home-page/cart/{ip}', 'PageHomeController@createCart');
@@ -127,6 +128,13 @@ Route::group(['prefix' => 'v1'], function(){
 	Route::post('seasons', 'SeasonToursController@create');
 	Route::put('seasons/{id}', 'SeasonToursController@update');
 	Route::delete('seasons/{id}', 'SeasonToursController@destroy');
+
+	//Emails
+	Route::get('emails', 'ListEmailController@index');
+	Route::get('emails/{id}', 'ListEmailController@show');
+	Route::post('emails', 'ListEmailController@create');
+	Route::put('emails', 'ListEmailController@updateStatus');
+	
 });
 
 Auth::routes();

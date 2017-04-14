@@ -73,6 +73,18 @@
 
 		getToursNews();
 
+		var getToursViews = function(){
+			homeService.getToursViews().then(function onSucess(response){
+				console.log('ToursViews: '+response.data);
+				$scope.toursViews = response.data;
+
+			}, function onError(response){
+				$scope.toursViews = null;
+			});
+		};
+
+		getToursViews();
+
 		var GetSearch = function(){
 			homeService.getSearch().then(function onSucess(response){
 				console.log('Search: '+response.data);
@@ -90,6 +102,39 @@
 			$slug = data.originalObject.slug;
 			window.location = "{{ url('/tour') }}/"+ $slug;
 		}
+
+		$scope.saveEmail = function(data){
+			console.log('Salvar: '+data)
+			
+			homeService.saveNewEmail(data).then(function onSucess(response){
+				console.log('Email: '+response.data);				
+
+			}, function onError(response){
+				console.log('EmailErro: '+response.data);				
+			});
+		};
+
+		
+
+		$scope.saveNewEmail = function(email){
+			console.log(email);
+			if(email['n_email'] == null){
+				return;
+			}
+
+			homeService.saveNewEmail(email).then(function onSucess(response){
+				console.log('Email: '+response.data);				
+
+			}, function onError(response){
+				console.log('EmailErro: '+response.data);				
+			});
+
+			$scope.newEmail = null;
+		}
+
+		var count = 0;
+
+
 
 
 

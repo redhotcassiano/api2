@@ -9,7 +9,7 @@ class Tours extends Model
 {
     protected $table = 'tours';
 
-    protected $fillable = ['title_tour', 'id_user_create', 'token_tour', 'idCategorie', 'slug_tour', 'status','details', 'about', 'questions', 'tips', 'price_cost', 'number_parcela'];
+    protected $fillable = ['title_tour', 'id_user_create', 'token_tour', 'idCategorie', 'slug_tour', 'status','details', 'about', 'questions', 'tips', 'price_cost', 'number_parcela', 'views'];
 
     public function allTours(){
         return self::all();         
@@ -17,7 +17,20 @@ class Tours extends Model
 
     public function allToursNews(){
         //$tour = self::orderBy('created_at','DESC')->limit(3)->get();
-        $tour['tours'] = self::orderBy('created_at','DESC')->limit(3)->get();
+        $tour['tours'] = self::where('status', 1)
+                            ->orderBy('created_at','DESC')->limit(3)->get();
+
+        $imgs = ImagesTours::allCapa();       
+        $tour['imgs'] = $imgs;
+
+        return $tour ;         
+    } 
+
+    public function allToursViews(){
+        //$tour = self::orderBy('created_at','DESC')->limit(3)->get();
+        $tour['tours'] = self::where('status', 1)
+                            ->orderBy('views','DESC')->limit(3)->get();
+                            
         $imgs = ImagesTours::allCapa();       
         $tour['imgs'] = $imgs;
 
@@ -103,5 +116,17 @@ class Tours extends Model
     public function calendar(){
 
         return $this->hasMany(Calendars::class, 'idTour'); 
+    }
+
+    public function updateViews($id, $view){
+        
+        $tour = self::where('id', $id)
+                    ->update(['views' => $view]); 
+
+        if($tour){
+            return $tour;
+        }else{
+            return false;
+        } 
     }
 }

@@ -20,12 +20,14 @@ class CreateToursTable extends Migration
             $table->string('title_tour');
             $table->string('slug_tour');
             $table->string('img_tour');
+            $table->integer('status');
             $table->text('details');
             $table->text('about');
             $table->text('questions');
             $table->text('tips');
             $table->decimal('price_cost');
             $table->integer('number_parcela');
+            $table->integer('views');
             $table->timestamps();
         });
     }
