@@ -12,10 +12,6 @@ use App\Http\Controllers\SessionController;
 use App\Models\Cart;
 use App\User;
 
-
-
-
-
 class TourInfoController extends Controller
 {
 
@@ -24,20 +20,26 @@ class TourInfoController extends Controller
         $this->tours = $tours;
         $this->cart = $cart;
         $this->request = $request;
-        $this->session = $session; 
+        $this->session = $session;
 
     }
 
-     
+
 
     public function index($slug)
     {
     	date_default_timezone_set('UTC');
-        $ip = $this->request->ip(); //$this->request->ip()
+
+			if($this->session->getSession('ip_user', $this->request) == false){
+					$ip = $this->request->ip(); //$this->request->ip()
+			}else{
+					$ip = $this->request->session()->get('ip_user');
+			}
+
 		$slug = $slug;
 		$tourInfo = false;
 		$tourInfo = $this->tours->getSlug($slug);
-		
+
 
 		if($tourInfo == '[]'){
 
@@ -45,10 +47,10 @@ class TourInfoController extends Controller
 
 	    }else{
 	    	//Cria o Carrinho
-	    	
+
 	    	if($this->session->getSession('id_user', $this->request) == false){
 	    		$id_user = 1;
-	    		$tourInfo[0]->id_user = $id_user;	    		
+	    		$tourInfo[0]->id_user = $id_user;
 
 	    	}else{
 	    		//Pega os valores das sessions;
@@ -56,7 +58,7 @@ class TourInfoController extends Controller
 	    		$tourInfo[0]->name_user = $this->request->session()->get('name_user');
 	    		$tourInfo[0]->email_user = $this->request->session()->get('email_user');
 	    		$tourInfo[0]->avatar_user = $this->request->session()->get('avatar_user');
-	    		
+
 	    	}
 	    	$id_user_ecommerce = $id_user['session_data'];
 	    	if($id_user_ecommerce == null){
@@ -88,9 +90,9 @@ class TourInfoController extends Controller
 			//return redirect('/');
 	    }
 	    //return response($tourInfo, 200);
-		
+
     }
-    
+
 
     public function getBanners($token)
     {
@@ -112,5 +114,5 @@ class TourInfoController extends Controller
     	endif;
 
     }
-    
+
 }

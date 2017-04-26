@@ -9,12 +9,6 @@ use App\Http\Controllers\Controller;
 
 class ToursController extends Controller
 {
-    /**
-     * Display a listing of the resource.     
-     *
-
-     * @return \Illuminate\Http\Response
-     */
 
     public function __construct(\App\Models\Tours $tours, Request $request){
         $this->tours = $tours;

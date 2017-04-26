@@ -13,5 +13,12 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular-rateit": "^3.0.2",
+    "pickadate": "^3.5.6",
+    "adm-dtp": "*",
+    "ng-dialog": "^1.0.1",
+    "angular-toastr": "^2.1.1"
+  }
 }

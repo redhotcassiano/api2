@@ -25,9 +25,9 @@ Route::get('loja', function () {
 
 Route::get('/email', 'HomeController@email')->name('sendEmail');
 
-Route::get('test', function(){	
+Route::get('test', function(){
     $dias = array('dia1'=> '1,', 'dia2'=>'2,');
-	return view('test')->with('dias', $dias);
+	  return view('test')->with('dias', $dias);
 });
 
 //Rotas da Session;
@@ -40,35 +40,36 @@ Route::get('session/delete/{name_session}', 'SessionController@deleteSession');
 
 
 Route::group(['middleware' => ['auth']], function () {
-	Route::get('dashboard', 'DashboardController@index');	
-	
+	Route::get('dashboard', 'DashboardController@index');
+
 	Route::get('minha-pagina', 'MyPageController@index');
 	Route::get('minha-pagina/logout', 'MyPageController@logout');
+	Route::get('logout', 'MyPageController@logout');
 
 });
 
 
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function(){
-	
-	Route::get('home-control', function(){    	
+
+	Route::get('home-control', function(){
 		return view ('dashboard/page_home_control');
 	});
 
-	Route::get('tours-control', function(){    	
+	Route::get('tours-control', function(){
 		return view ('dashboard/page_tours_control');
 	});
 
 	//tours
-	Route::get('tours', function(){    	
+	Route::get('tours', function(){
 		return view ('dashboard/page_table_tours_control');
 	});
 
 	Route::get('addtours', function(){
 		$scriptpage = url('assets/js/pages/dashboard.js');
-		$codRand = rand(10, 99999999999); 
+		$codRand = rand(10, 99999999999);
 
-		$verif = DB::table('tours')->where('token_tour', $codRand)->value('title_tour'); 
+		$verif = DB::table('tours')->where('token_tour', $codRand)->value('title_tour');
 
 		if($verif != null){
 			$codRand = rand(10, 99999999999);
@@ -95,6 +96,14 @@ Route::group(['prefix' => 'v1'], function(){
 	Route::put('tours/{id}', 'ToursController@update');
 	Route::delete('tours/{id}', 'ToursController@destroy');
 
+	//category
+	Route::get('category', 					'CategoryController@index');
+	Route::get('category/{id}', 		'CategoryController@show');
+	Route::post('category', 				'CategoryController@create');
+	Route::put('category/{id}', 		'CategoryController@update');
+	Route::delete('category/{id}', 	'CategoryController@destroy');
+
+
 
 	//Home-Page
 	Route::get('home-page', 'PageHomeController@index');
@@ -109,14 +118,14 @@ Route::group(['prefix' => 'v1'], function(){
 
 	//Images Tours
 	Route::get('images', 'ImagesToursController@index');
-	Route::get('images/{id}', 'ImagesToursController@show');	
+	Route::get('images/{id}', 'ImagesToursController@show');
 	Route::post('images', 'ImagesToursController@create');
 	Route::put('images/{id}', 'ImagesToursController@update');
 	Route::delete('images/{id}', 'ImagesToursController@destroy');
 
 	////Images
 	Route::get('imagespages', 'ImagesPagesController@index');
-	Route::get('imagespages/{id}', 'ImagesPagesController@show');	
+	Route::get('imagespages/{id}', 'ImagesPagesController@show');
 	Route::post('imagespages', 'ImagesPagesController@create');
 	Route::put('imagespages/{id}', 'ImagesPagesController@update');
 	Route::delete('imagespages/{id}', 'ImagesPagesController@destroy');
@@ -124,8 +133,8 @@ Route::group(['prefix' => 'v1'], function(){
 	////Temporadas
 	Route::get('seasons', 'SeasonToursController@index');
 	Route::get('seasons/{id}', 'SeasonToursController@show');
-	Route::get('seasons/tour/{token}', 'SeasonToursController@getSeasonsTour');	
-	Route::post('seasons', 'SeasonToursController@create');
+	Route::get('seasons/tour/{token}', 'SeasonToursController@getSeasonsTour');
+	Route::post('/seasons', 'SeasonToursController@create');
 	Route::put('seasons/{id}', 'SeasonToursController@update');
 	Route::delete('seasons/{id}', 'SeasonToursController@destroy');
 
@@ -134,17 +143,34 @@ Route::group(['prefix' => 'v1'], function(){
 	Route::get('emails/{id}', 'ListEmailController@show');
 	Route::post('emails', 'ListEmailController@create');
 	Route::put('emails', 'ListEmailController@updateStatus');
-	
+
+	//Checkout
+	Route::get('checkout/getCart/{ip}/{user}', 'CheckoutController@getCart');
+	Route::get('checkout/getListCart/{id_cart}', 'CheckoutController@getListTours');
+	Route::get('checkout/tour/{id}', 'CheckoutController@getTours');
+	Route::get('checkout/tour/cupons/{cupon}', 'CheckoutController@validateCupon');
+
+	//cupons
+	Route::get('cupons', 'Checkout\CuponsController@index');
+	Route::get('cupons/{id}', 'Checkout\CuponsController@show');
+	Route::get('cupons/validate/{cupon}', 'Checkout\CuponsController@validateCupon');
+	Route::post('cupons', 'Checkout\CuponsController@create');
+	Route::put('cupons', 'Checkout\CuponsController@update');
+	Route::delete('cupons', 'Checkout\CuponsController@destroy');
+
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-///// ecommerce ////////	
+///// ecommerce ////////
 Route::get('tour/{slug}', 'TourInfoController@index');
 Route::get('tour/{slug}/{associado}', 'TourInfoController@index');
-	
+
+Route::get('checkout', 'CheckoutController@index');
+
+
 
 
 
@@ -152,7 +178,7 @@ Route::group(['prefix' => 'web'], function(){
 	//Cart E-commerce
 	Route::get('cart', 'CartController@index');
 	Route::get('cart/{id}', 'CartController@show');
-	Route::get('cart/list/{id}', 'CartController@getListCart');	
+	Route::get('cart/list/{id}', 'CartController@getListCart');
 	Route::post('cart', 'CartController@create');
 	Route::put('cart/{id}', 'CartController@update');
 	Route::put('cart/{id}/{total}', 'CartController@updateTotal');
@@ -160,7 +186,7 @@ Route::group(['prefix' => 'web'], function(){
 
 	//List Cart E-commerce
 	Route::get('listcart', 'ListCartController@index');
-	Route::get('listcart/{id}', 'ListCartController@show');		
+	Route::get('listcart/{id}', 'ListCartController@show');
 	Route::post('listcart', 'ListCartController@create');
 	Route::put('listcart/{id}', 'ListCartController@update');
 	Route::delete('listcart/{id}', 'ListCartController@destroy');
@@ -182,4 +208,3 @@ Route::group(['prefix' => 'web'], function(){
 	Route::post('sistem', 'SistemController@create');
 
 });
-

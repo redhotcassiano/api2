@@ -8,10 +8,10 @@
 	<link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ url('layout/css/animate.css') }}">
-	<link rel="stylesheet" href="{{ url('layout/css/plugins.css') }}">	
+	<link rel="stylesheet" href="{{ url('layout/css/plugins.css') }}">
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/pickadate/lib/compressed/themes/classic.css') }}">
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/pickadate/lib/compressed/themes/classic.date.css') }}">
-	<!--<link rel="stylesheet" href="css/ferramentas/badget.css"> -->	
+	<!--<link rel="stylesheet" href="css/ferramentas/badget.css"> -->
 
 	<script src="{{ url('layout/js/vendors/jquery.min.js') }}"></script>
     <script src="{{ url('layout/css/owlcarousel/owl.carousel.js') }}"></script>
@@ -23,7 +23,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-	
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.css">
 	<script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.js"></script>
 
@@ -31,10 +31,10 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 	 <!-- Your application bootstrap  -->
-	<script src="{{ url('layout/js/app/modules/ui-bootstrap.min.js') }}"></script>	
+	<script src="{{ url('layout/js/app/modules/ui-bootstrap.min.js') }}"></script>
 	<script src="{{ url('layout/js/app/modules/datapicker/angular-datepicker.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ url('layout/js/app/modules/datapicker/angular-datepicker.min.css') }}">
-	<script src="{{ url('app/vendors/angular-sanitize/angular-sanitize.min.js') }}"></script>	
+	<script src="{{ url('app/vendors/angular-sanitize/angular-sanitize.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ url('app/vendors/ng-notify/dist/ng-notify.min.css') }}">
 	<script src="{{ url('app/vendors/ng-notify/dist/ng-notify.min.js') }}"></script>
 
@@ -48,7 +48,7 @@
 
 	<!-- Service -->
 	<script src="{{ url('layout/js/services/myPageService.js') }}"></script>
-	<!-- ********************** -->	  
+	<!-- ********************** -->
 	<link rel="stylesheet" href="{{ url('layout/css/templates/passeiosdev.css') }}">
 	<style>
 		.datepicker {
@@ -56,9 +56,9 @@
 		  position: absolute;
 		}
 
-		.picker {		    
+		.picker {
 		    z-index: 98;
-		    width: 309px;		   
+		    width: 309px;
 		}
 
 		.picker__holder {
@@ -79,7 +79,7 @@
 
 	<!-- Controller da Página do produto -->
 	@include('ecommerce/controllers/mypageController')
-	
+
 	<!-- /Controller da Página do produto -->
 
 
@@ -104,10 +104,10 @@
 						<painel class="painel">
 							<h4>Carrinho</h4>
 							<div class="painel painel-default" ng-repeat="listCart in carts">
-								
+
 								<div ng-repeat="cart_info in listCart.cart">
-									<div ng-repeat="tour_info in listCart.tour">					
-										<div class="row">		    		
+									<div ng-repeat="tour_info in listCart.tour">
+										<div class="row">
 								    		<div class="col-md-4">
 								    			image
 								    		</div>
@@ -116,10 +116,13 @@
 								    		</div>
 								    		<div class="col-md-4">
 								    			@{{cart_info.price_total_tour}}
+													<div class="remove">
+														<a href="#remove" ng-click="removeTour(tour_info.id)">X Remover</a>
+													</div>
 								    		</div>
 								    	</div>
-										<hr> 
-									</div>								
+										<hr>
+									</div>
 								</div>
 						</painel>
 					</div>
@@ -156,28 +159,28 @@
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
-	<footer>		
+	<footer>
 		<div style="background: #fff; margin-top: 0px;" class="footer_secund">
 			<div class="container">
 				<div style="margin-top: 25px;" class="desc_footer">
 					<h4>Natal Praias 2016 Todos os Direitos Reservados CNPJ: 00.893.767/0001-97</h4>
-				</div>				
+				</div>
 				<div class="redesociais">
 					<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-					
-				</div>				
-			</div>			
-		</div>		
+
+				</div>
+			</div>
+		</div>
 
 	</footer>
 
-	
+
 	<script>
 		//$('.testPo').webuiPopover({title:'Title',content:'Content'});
 		//$('.testPo').webuiPopover({url:'#ShopCart', width:560, height:300, animation:'pop'});

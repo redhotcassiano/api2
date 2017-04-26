@@ -12,17 +12,32 @@
 		};
 	}]);
 
-
-	angular.module('pag-produto').controller('pagProdutoController', function($scope, $http, tourService, ngNotify){
+	angular.module('pag-produto').controller('pagProdutoController', function($scope, $http, tourService, ngNotify, ngDialog, toastr){
 		//Variaveis;
 
-		$scope.dateNow = new Date();	
+		//Buscar a Localização do usuario;
+		$.getJSON("http://ip-api.com/json/?callback=?", function(data) {
+			$scope.localization = data;
+			//console.log($scope.localization);
+			saveIpClient($scope.localization.query);
+		});
+
+		var saveIpClient = function(ip){
+			tourService.saveIpClient("ip_user", ip).then(function onSuccess(response){
+				//console.log($scope.carts);
+			}, function onError(response){
+				console.log(response.data + " erro: " + response.statusText);
+
+			});
+		}
+
+		$scope.dateNow = new Date();
 
 		$scope.cart = {{ $tourInfo->cart[0]->id }};
 
 		console.log($scope.cart);
 
-		$scope.price = {{  $tourInfo->price_cost }};		
+		$scope.price = {{  $tourInfo->price_cost }};
 
 		$scope.parcela = {{  $tourInfo->number_parcela }};
 
@@ -37,11 +52,29 @@
 		$scope.avatar_user = "{{ $tourInfo->avatar_user }}";
 		// Fim das Variaveis;
 
+		//popup
+		var clickToOpen = function () {
+        ngDialog.open({ template: 'dialog01', className: 'ngdialog-theme-default' });
+    };
+
+		//clickToOpen();
+
+		$scope.formLogin = function(){
+			ngDialog.open({ template: 'form-login', className: 'ngdialog-theme-default'});
+		}
+
+
+
+		//toast
+		var toast = toastr.success('Hello world!', 'Toastr fun!');
+		//toastr.refreshTimer(toast, 5000);
+
+
 		//Funções;
 		var listarCart = function(id){
-			tourService.getCart(id).then(function onSuccess(response){			
-				$scope.carts = response.data;			
-				//console.log($scope.carts);				
+			tourService.getCart(id).then(function onSuccess(response){
+				$scope.carts = response.data;
+				//console.log($scope.carts);
 			}, function onError(response){
 				console.log(response.data + " erro: " + response.statusText);
 				$scope.carts = [];
@@ -51,12 +84,12 @@
 
 		//Get Session;
 
-		
+
 
 		var getSessionTour = function(name_session, $campo){
-			tourService.getSession(name_session).then(function onSuccess(response){			
-				$scope.name_user = "test: " + response.data;			
-				//console.log($scope.carts);				
+			tourService.getSession(name_session).then(function onSuccess(response){
+				$scope.name_user = "test: " + response.data;
+				//console.log($scope.carts);
 			}, function onError(response){
 				console.log(response.data + " erro: " + response.statusText);
 				return response.statusText;
@@ -69,7 +102,7 @@
 		// Fim Get Session;
 
 
-		
+
 		//console.log("total: "+ {{ $tourInfo->cart[0]->total_price }});
 		$scope.addListCart = function(tour){
 			tour['hour_tour'] = "8:00";
@@ -81,14 +114,14 @@
 					//Atualiza o total do Carrinho;
 					updateTotalPrice(id, total);
 					//
-					
+
 					ngNotify.set('O Passeio ' + tour['title'] +
 								 ' Foi Adicionado com Sucesso!<br>', {
 					    position: 'top',
 					    sticky: true,
 					    type: 'success',
 					    html: true
-				    	
+
 						});
 				}, function onError(response){
 					ngNotify.set('O Passeio ' + tour['title'] +
@@ -97,7 +130,7 @@
 					    sticky: true,
 					    type: 'error',
 					    html: true
-				    	
+
 						});
 					console.log("Erro");
 				});
@@ -114,13 +147,9 @@
 
 		$scope.showListCar = function(){
 			listarCart({{ $tourInfo->cart[0]->id }});
-		}; 
+		};
 
-		//Buscar a Localização do usuario;
-		$.getJSON("http://ip-api.com/json/?callback=?", function(data) {
-			$scope.localization = data;
-			//console.log($scope.localization);
-		});
+
 
 		//Buscar os comentarios do Tour;
 		$scope.ativarComment = false;
@@ -132,10 +161,10 @@
 
 
 		var getComments = function(id){
-			tourService.getComments(id).then(function onSuccess(response){			
+			tourService.getComments(id).then(function onSuccess(response){
 				$scope.commentsTour = response.data;
 				//$scope.parts = $scope.commentsTour.date[0].split('-');
-				//console.log($scope.parts);				
+				//console.log($scope.parts);
 			}, function onError(response){
 				console.log(response.data + " erro: " + response.statusText);
 				$scope.commentsTour = [];
@@ -144,7 +173,7 @@
 		};
 
 		getComments({{ $tourInfo->id }});
-		
+
 
 
 		//Salvar os commentarios;
@@ -152,7 +181,7 @@
 			comments['date'] = '{{ $tourInfo->dateNow }}';
 			comments['state'] = $scope.localization.city;
 			comments['country'] = $scope.localization.region;
-			
+
 			tourService.saveComments(comments).then(function onSucess(response){
 					$scope.comments = [];
 					getComments({{ $tourInfo->id }});
@@ -162,7 +191,7 @@
 					    sticky: true,
 					    type: 'success',
 					    html: true
-				    	
+
 						});
 				}, function onError(response){
 					ngNotify.set('O Seu Comentário Não Foi Adicionado!<br>', {
@@ -170,7 +199,7 @@
 					    sticky: true,
 					    type: 'error',
 					    html: true
-				    	
+
 						});
 					console.log("Erro"+comments);
 				});
@@ -178,8 +207,8 @@
 			};
 		//Fim das Funções;
 	});
- 		
 
- 	
+
+
 
 </script>

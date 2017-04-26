@@ -3,6 +3,9 @@ angular.module("dashboard").factory('toursService',function($http) {
 		lista: function(){
 			return $http.get('/v1/tours');
 		},
+		getCategory: function(){
+			return $http.get('/v1/category');
+		},
 		cadastra: function(data){
 			return $http.post('/v1/tours', data);
 		},
@@ -16,6 +19,12 @@ angular.module("dashboard").factory('toursService',function($http) {
 		},
 		getImgs: function(token){
 			return $http.get('/v1/tours/imgs/'+token);
-		}
+		},
+		
+		//seasons
+		saveSeason: function(data){
+			return $http.post('/v1/seasons', data);
+		},
+
 	}
 });

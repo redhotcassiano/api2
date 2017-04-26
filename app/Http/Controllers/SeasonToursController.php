@@ -26,9 +26,14 @@ class SeasonToursController extends Controller
     public function create()
     {
         //$data = $this->request->all();
+        $data =  $this->season->saveSeason();
 
-        //return $data;
-       return $this->season->saveSeason();
+        if(is_null($data)){
+            return response(['response' => 'Não foi possivel Salvar a Temporada!'], 400);
+        }
+
+        return $data;
+
     }
 
     /**

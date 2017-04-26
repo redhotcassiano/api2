@@ -18,21 +18,26 @@ class MyPageController extends Controller
         $this->tours = $tours;
         $this->cart = $cart;
         $this->request = $request;
-        $this->session = $session; 
+        $this->session = $session;
 
-    }   
+    }
 
    	public function index()
     {
-        $ip = $this->request->ip(); //$this->request->ip()
-		
-		$tourInfo[0] = "";	
+
+      if($this->session->getSession('ip_user', $this->request) == false){
+          $ip = $this->request->ip(); //$this->request->ip()
+      }else{
+          $ip = $this->request->session()->get('ip_user');
+      }
+
+		$tourInfo[0] = "";
 
 	    	//Cria o Carrinho
-	    	
+
 	    	if($this->session->getSession('id_user', $this->request) == false){
 	    		$id_user = 1;
-	    		$tourInfo[0]->id_user = $id_user;	    		
+	    		$tourInfo[0]->id_user = $id_user;
 
 	    	}else{
 	    		//Pega os valores das sessions;
@@ -40,11 +45,11 @@ class MyPageController extends Controller
 	    		$tourInfo[0] = array(
 	    				'cart' => '',
 	    			);
-	    		
-	    		
+
+
 	    	}
 	    	$id_user_ecommerce = $id_user;
-	    	
+
 	    	$ip_user = $ip;
 	    	$newCart = $this->cart->saveNewCart($id_user_ecommerce, $ip_user);
 
@@ -61,19 +66,19 @@ class MyPageController extends Controller
 						);
 
 			//return redirect('/');
-	    
-		
+
+
     }
 
    public function getListCart($idCart){
    		$listCart = $this->cart->getListCart($idCart);
         $dados = [];
-        foreach ($listCart as $data) { 
-            //$dados[]->values['cart'] = $data;          
-            $dados[] = $this->cart->getTour($data->tour_id, $data);         
-            
+        foreach ($listCart as $data) {
+            //$dados[]->values['cart'] = $data;
+            $dados[] = $this->cart->getTour($data->tour_id, $data);
+
         };
-        
+
 
          return $dados;
 

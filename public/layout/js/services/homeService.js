@@ -3,7 +3,7 @@ angular.module("home").factory('homeService',function($http) {
 		lista: function(){
 			return $http.get('/v1/tours');
 		},
-				
+
 		getImgs: function(token){
 			return $http.get('/v1/tours/imgs/'+token);
 		},
@@ -27,7 +27,7 @@ angular.module("home").factory('homeService',function($http) {
 		cadastraTourCart: function(data){
 			return $http.post('/web/listcart', data);
 		},
-		
+
 		getSession: function(name_session){
 			return $http.get('/session/get/'+name_session);
 		},
@@ -55,6 +55,10 @@ angular.module("home").factory('homeService',function($http) {
 		saveNewEmail: function(data){
 			return $http.post('/v1/emails', data);
 		},
+		
+		saveIpClient: function(name, data){
+			return $http.get('/session/save/'+name+'/'+data);
+		}
 	}
 
 });

@@ -41,7 +41,7 @@ angular.module("pag-produto").factory('tourService',function($http) {
 		cadastraTourCart: function(data){
 			return $http.post('/web/listcart', data);
 		},
-		
+
 		getSession: function(name_session){
 			return $http.get('/session/get/'+name_session);
 		},
@@ -53,6 +53,10 @@ angular.module("pag-produto").factory('tourService',function($http) {
 		saveComments: function(data){
 			return $http.post('/web/comments', data);
 		},
+
+		saveIpClient: function(name, data){
+			return $http.get('/session/save/'+name+'/'+data);
+		}
 	}
 
 });

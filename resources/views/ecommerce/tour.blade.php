@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="pag-produto" ng-controller="pagProdutoController">
+<html lang="pt-br" ng-app="pag-produto" ng-controller="pagProdutoController">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,10 +8,10 @@
 	<link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ url('layout/css/animate.css') }}">
-	<link rel="stylesheet" href="{{ url('layout/css/plugins.css') }}">	
+	<link rel="stylesheet" href="{{ url('layout/css/plugins.css') }}">
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/pickadate/lib/compressed/themes/classic.css') }}">
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/pickadate/lib/compressed/themes/classic.date.css') }}">
-	<!--<link rel="stylesheet" href="css/ferramentas/badget.css"> -->	
+	<!--<link rel="stylesheet" href="css/ferramentas/badget.css"> -->
 
 	<script src="{{ url('layout/js/vendors/jquery.min.js') }}"></script>
     <script src="{{ url('layout/css/owlcarousel/owl.carousel.js') }}"></script>
@@ -23,7 +23,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-	
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.css">
 	<script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.js"></script>
 
@@ -31,14 +31,24 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 	 <!-- Your application bootstrap  -->
-	<script src="{{ url('layout/js/app/modules/ui-bootstrap.min.js') }}"></script>	
+	<script src="{{ url('layout/js/app/modules/ui-bootstrap.min.js') }}"></script>
 	<script src="{{ url('layout/js/app/modules/datapicker/angular-datepicker.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ url('layout/js/app/modules/datapicker/angular-datepicker.min.css') }}">
-	<script src="{{ url('app/vendors/angular-sanitize/angular-sanitize.min.js') }}"></script>	
+	<script src="{{ url('app/vendors/angular-sanitize/angular-sanitize.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ url('app/vendors/ng-notify/dist/ng-notify.min.css') }}">
 	<script src="{{ url('app/vendors/ng-notify/dist/ng-notify.min.js') }}"></script>
 	<script src="{{ url('layout/js/vendors/angular-rateit/dist/ng-rateit.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/angular-rateit/dist/ng-rateit.css') }}">
+	<script src="{{ url('app/vendors/angular-autocomplete/angucomplete-alt.min.js') }}"></script>
+
+	<!--Dialog-->
+	<link rel="stylesheet" href="{{ url('layout/js/vendors/ng-dialog/css/ngDialog.min.css') }}">
+	<link rel="stylesheet" href="{{ url('layout/js/vendors/ng-dialog/css/ngDialog-theme-default.min.css') }}">
+	<script src="{{ url('layout/js/vendors/ng-dialog/js/ngDialog.min.js') }}"></script>
+
+	<!--Toast-->
+	<link rel="stylesheet" type="text/css" href="{{ url('layout/js/vendors/angular-toastr/dist/angular-toastr.css') }}" />
+	<script type="text/javascript" src="{{ url('layout/js/vendors/angular-toastr/dist/angular-toastr.tpls.js') }}"></script>
 
 	<!-- App Angularjs -->
 
@@ -50,17 +60,74 @@
 
 	<!-- Service -->
 	<script src="{{ url('layout/js/services/tourService.js') }}"></script>
-	<!-- ********************** -->	  
+	<!-- ********************** -->
 	<link rel="stylesheet" href="{{ url('layout/css/templates/passeiosdev.css') }}">
 	<style>
+		/*header*/
+
+		.cartfixo{
+			position: absolute;
+			top: 0;
+		}
+
+		.icon-bascket{
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		.basket{
+			font-size: 8em;
+			color: #fe5e22;
+		}
+
+		.basket::before {
+    		content: "\ea6c";
+		}
+
+		.not-cart{
+			width: 70%;
+			margin:0 auto;
+			padding: 0 auto;
+			margin-top: 20px;
+		}
+
+		.not-cart p{
+			font-size: 12px;
+
+		}
+
+		.not-cart p > span{
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		.angucomplete-dropdown{
+			background-color: #fff !important;
+			width: 40% !important;
+			cursor: pointer;
+			margin: 0 auto;
+			margin-top: 2px;
+			z-index: 100;
+			position: relative;
+		}
+
+		header .search_home button {
+		    height: 42px;
+		    margin-top: -1px !important;
+		    margin-left: 200px !important;
+		    width: 70px;
+		    position: absolute;
+		}
+
+
 		.datepicker {
 		  visibility: hidden;
 		  position: absolute;
 		}
 
-		.picker {		    
+		.picker {
 		    z-index: 98;
-		    width: 309px;		   
+		    width: 309px;
 		}
 
 		.picker__holder {
@@ -81,13 +148,84 @@
 	        background-size: 22px;
 	    }
 
+
+
 	</style>
 
 	<!-- Controller da Página do produto -->
 	@include('ecommerce/controllers/pageTourController')
-	
-	<!-- /Controller da Página do produto -->
 
+	<!-- /Controller da Página do produto -->
+	<!-- Dialogs -->
+		<script type="text/ng-template" id="dialog01">
+	    <h1>Template heading</h1>
+	    <p>Content goes here</p>
+		</script>
+
+		<script type="text/ng-template" id="form-login">
+			<form role="form" method="POST" action="{{ route('login') }}">
+					{{ csrf_field() }}
+					<div class="login-form">
+							<div class="text-center">
+									<div class=""><img src="{{ url('layout/img/logo_natalpraias.png')}}" alt="natal praias"></div>
+									<h5 class="content-group-lg"><small class="display-block"></small></h5>
+							</div>
+
+							<div class="form-group has-feedback has-feedback-left">
+
+									<input id="email" type="email" class="form-control input-lg" name="email" value="{{ old('email') }}" placeholder="E-mail" required autofocus>
+
+									@if ($errors->has('email'))
+											<span class="help-block">
+													<strong>{{ $errors->first('email') }}</strong>
+											</span>
+									@endif
+									<div class="form-control-feedback">
+											<i class="icon-user text-muted"></i>
+									</div>
+							</div>
+
+							<div class="form-group has-feedback has-feedback-left">
+									<input id="password" type="password" class="form-control input-lg" placeholder="Password" name="password" required>
+
+									@if ($errors->has('password'))
+											<span class="help-block">
+													<strong>{{ $errors->first('password') }}</strong>
+											</span>
+									@endif
+									<div class="form-control-feedback">
+											<i class="icon-lock2 text-muted"></i>
+									</div>
+							</div>
+
+							<div class="form-group login-options">
+									<div class="row">
+											<div class="col-sm-6">
+													<label class="checkbox-inline">
+
+															<input type="checkbox" name="remember" class="styled" {{ old('remember') ? 'checked' : '' }}>
+															Lembra-me
+													</label>
+											</div>
+
+											<div class="col-sm-6 text-right">
+													<a class="btn btn-link" href="{{ route('password.request') }}">
+															Esqueceu sua sehna?
+													</a>
+											</div>
+									</div>
+							</div>
+
+							<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block btn-lg">Login <i class="icon-arrow-right14 position-right"></i></button>
+							</div>
+							<a href="{{ url('web/social/google') }}">Acessar com google</a>
+							<a href="{{ url('web/social/facebook') }}">Acessar com facebook</a>
+
+					</div>
+			</form>
+			<!-- /advanced login -->
+		</script>
 
 </head>
 <body>
@@ -95,23 +233,23 @@
 	<!-- Inicio do Main -->
 	<main>
 		<section id="links">
-			<!-- <p><a href="home.html">Home</a>/<a href="passeiosview.html">Passeios</a>/Passeio Selecionado</p> -->			
+			<!-- <p><a href="home.html">Home</a>/<a href="passeiosview.html">Passeios</a>/Passeio Selecionado</p> -->
 		</section>
 		<section id="info_passeio">
 			<div class="container-fluid">
 					<!-- test Popover -->
 
-					<!-- ************* -->				
+					<!-- ************* -->
 					<div class="links-pages">
-						<p><a href="#">Home</a>/<a href="#">Passeios</a>/{{ $tourInfo->title_tour }}</p> 								
+						<p><a href="#">Home</a>/<a href="#">Passeios</a>/{{ $tourInfo->title_tour }}</p>
 					</div>
 					<!-- Carousel -->
 					<div class="carrousel-passeios">
 						<div class="owl-carousel"  >
-							@foreach ($tourInfo->banner as $banner)						
+							@foreach ($tourInfo->banner as $banner)
 						  	<div class="item"><img src="{{ url('img') }}/{{ $banner->name }}" alt="testando imagens"></div>
-						  	@endforeach						  						
-						</div>					
+						  	@endforeach
+						</div>
 					</div>
 					<!-- Fim do Carousel -->
 					<!-- Titulo e Preços -->
@@ -128,11 +266,11 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
-									
-								</div>								
+
+								</div>
 							</div>
 							<div class="right-submargin">
-								<!-- Card Preço 
+								<!-- Card Preço
 								<div class="panel panel-default price-panel text-rigth">
 									<div class="panel-body">
 										<div class="price-panel-content">
@@ -161,11 +299,11 @@
 										<li class="share-line"><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
 									</ul>
 								</div>
-							</div> 
+							</div>
 						</div>
 					</div>
-					<!-- Fim do Titulo e Preço -->	
-					<div class="info-passeio-sessions">											
+					<!-- Fim do Titulo e Preço -->
+					<div class="info-passeio-sessions">
 							<div class="">
 							  <div class="row" ng-controller="TabController">
 							  	<div class="menu-tab">
@@ -188,7 +326,7 @@
 							    <div class="row">
 							  		<div class="container-tabs">
 								       	<div ng-show="isSet(1)">
-								         	{!! $tourInfo->details !!}								          									         	
+								         	{!! $tourInfo->details !!}
 								        </div>
 										<div ng-show="isSet(2)">
 								          	{!! $tourInfo->about !!}
@@ -211,7 +349,7 @@
 						</div>
 						<div class="container">
 
-							<div class="row">								
+							<div class="row">
 								<article class="card-product-main">
 									<a href="#" class="product thumbnail" title="passeio natal" alt="passeio natal">
 										<!-- Badges -->
@@ -248,8 +386,8 @@
 											<div class="comprados-semana-passeio">
 												<i class="fa fa-users"></i>
 												<span>38 Comprados na última semana</span>
-											</div>										
-											
+											</div>
+
 										</div>
 										<!--*********-->
 
@@ -292,8 +430,8 @@
 											<div class="comprados-semana-passeio">
 												<i class="fa fa-users"></i>
 												<span>38 Comprados na última semana</span>
-											</div>										
-											
+											</div>
+
 										</div>
 										<!--*********-->
 
@@ -335,8 +473,8 @@
 											<div class="comprados-semana-passeio">
 												<i class="fa fa-users"></i>
 												<span>38 Comprados na última semana</span>
-											</div>										
-											
+											</div>
+
 										</div>
 										<!--*********-->
 
@@ -366,7 +504,7 @@
 									<p>Nota com base na avaliação de <b>37 viajantes</b></p>
 								</div>
 							</div>
-							
+
 							<div class="divicao"></div>
 							<div class="nota-comentarios">
 								<p><span>50 avaliações</span> com comentários</p>
@@ -378,7 +516,7 @@
 							<div class="comentario-user">
 								<img class="img img-round" src="@{{commentTour.img_user}}" alt="@{{commentTour.name_user}}">
 								<div class="name-user">@{{commentTour.name_user}}</div>
-								<div class="stars">									
+								<div class="stars">
 									<div ng-rate-it ng-init="model.readonly = commentTour.stars_share" ng-model="model.readonly" read-only="commentTour.stars_share" star-width="22" star-height="22"></div>
 								</div>
 								<div class="date">@{{commentTour.date}}</div>
@@ -404,12 +542,12 @@
 								<p>Foi um passeio incrível, praias belíssimas, com vista maravilhosa.estive do dia 25 ao dia 31 de Maio 2016.</p>
 							</div>
 						</div>
-						
+
 						<div class="comentario-user">
 							<div class="row">
 								<div class="col-md-6 col-offset-6">
 									<button class="btn btn-primary" ng-click="enviarComments(!ativarComment)" ng-hide="ativarComment">Enviar Comentário</button>
-									
+
 								</div>
 							</div>
 							<div class="row" ng-hide="!ativarComment">
@@ -419,42 +557,42 @@
                             			<a href="{{ url('web/social/facebook') }}" ng-if="name_user == ''">Acessar com facebook</a>
 
 										<img src="@{{avatar_user}}" alt="@{{name_user}}" ng-if="avatar_user != ''">
-										
+
 										<input type="hidden" value="@{{comments.img_user = avatar_user}}"  ng-model="comments.img_user" ng-if="avatar_user != ''">
 
-										<input type="hidden" value="@{{comments.img_user = 'defaulcomments.jpg'}}" ng-model="comments.img_user" ng-if="avatar_user == ''">		
+										<input type="hidden" value="@{{comments.img_user = 'defaulcomments.jpg'}}" ng-model="comments.img_user" ng-if="avatar_user == ''">
 
 										<div class="col-md-10 form-group">
-											<input  type="hidden" class="form-control" value="@{{comments.name_user = name_user }}" placeholder="Informe seu Nome..." ng-model="comments.name_user" ng-if="name_user != ''">
-											<input  type="text" class="form-control" placeholder="Informe seu Nome..." ng-model="comments.name_user" ng-if="name_user == ''">								
+											<input  type="hidden" class="form-control" value="@{{comments.name_user = name_user }}" placeholder="Informe seu Nome..." ng-model="comments.name_user" ng-if="name_user != ''" required="true">
+											<input  type="text" class="form-control" placeholder="Informe seu Nome..." ng-model="comments.name_user" ng-if="name_user == ''">
 										</div>
 										<div class=" col-md-10 form-group">
-											<input type="hidden" class="form-control" value="@{{comments.email_user = email_user }}" placeholder="Informe seu Email..." ng-model="comments.email_user" ng-if="email_user != ''">
+											<input type="hidden" class="form-control" value="@{{comments.email_user = email_user }}" placeholder="Informe seu Email..." ng-model="comments.email_user" ng-if="email_user != ''" required="true">
 
 											<input type="email" class="form-control" placeholder="Informe seu Email..." ng-model="comments.email_user" ng-if="email_user == ''">
 										</div>
 										<div class=" col-md-10 form-group">
 											<textarea class="form-control" name="" id="" cols="50" rows="10" placeholder="Comentário..." ng-model="comments.comment"></textarea>
 										</div>
-										<div class=" col-md-6 form-group">									
-											<div ng-rate-it star-width="22" star-height="22" ng-model="comments.stars_share"></div>
+										<div class=" col-md-6 form-group">
+											<ng-rate-it star-width="22" star-height="22" ng-model="comments.stars_share"></ng-rate-it>
 										</div>
-										<div class=" col-md-6 form-group">	
-											<input type="hidden" value="@{{comments.idTour = tour_id}}" ng-init="tour_id = {{ $tourInfo->id }}" ng-model="comments.idTour">												
+										<div class=" col-md-6 form-group">
+											<input type="hidden" value="@{{comments.idTour = tour_id}}" ng-init="tour_id = {{ $tourInfo->id }}" ng-model="comments.idTour">
 
-											<button class="btn-primary btn btn-block" ng-click="saveComments(comments)">Enviar</button>
+											<button class="btn-primary btn btn-block" ng-click="saveComments(comments)" ng-disabled="!comments.idTour || !comments.name_user || !comments.email_user || !comments.stars_share">Enviar</button>
 										</div>
-										
+
 									</form>
 								</div>
 							</div>
-							
+
 
 
 						</div>
-						
+
 					</div>
-					<!-- Fim das Avaliações -->			
+					<!-- Fim das Avaliações -->
 			</div>
 		</section>
 		<section id="calendario">
@@ -488,12 +626,12 @@
 			    </div>
 			</datepicker>-->
 			<input type="text" class="datepicker" ng-model="tour.date_tour">
-			
+
 			<div class="calendar-height"></div>
 			<div class="info-price-user" ng-if="tour.date_tour">
-				<div class="adulto-info">				
-					<div class="coluna-peq">						
-						<span class="adulto-label">Adulto (12+)</span><br>						
+				<div class="adulto-info">
+					<div class="coluna-peq">
+						<span class="adulto-label">Adulto (12+)</span><br>
 						<span class="valor-secund">R$ @{{valor1 = price * countAdult | number: 2}}</span>
 					</div>
 					<div class="coluna-peq text-right">
@@ -503,8 +641,8 @@
 						<i class="fa fa-plus spin-minus text-info disabled" ng-init="countAdult = 1" ng-click="countAdult = countAdult + 1" ng-model="tour.countAdult"></i>
 						<!-- <button ng-init="countAdult = 1" ng-click="countAdult = countAdult + 1">+</button> -->
 						@{{tour.Adult}}
-					</div>			
-					    
+					</div>
+
 				</div>
 				<div class="crianca-info">
 					<div class="coluna-peq">
@@ -517,7 +655,7 @@
 						<input type="text" class="input-price-info" value="@{{tour.count_crianca = contCrian}}">
 						<i class="fa fa-plus spin-minus text-info disabled" ng-init="contCrian = 0" ng-click="contCrian = contCrian + 1" ng-model="tour.count_crianca"></i>
 						<!-- <button ng-init="countAdult = 1" ng-click="countAdult = countAdult + 1">+</button> -->
-					</div>					    
+					</div>
 				</div>
 				<div class="infantil-info">
 					<div class="coluna-peq">
@@ -530,8 +668,8 @@
 						<input type="text" class="input-price-info"  value="@{{tour.count_infantil = contInfa}}">
 						<i class="fa fa-plus spin-minus text-info disabled" ng-init="contInfa = 0" ng-click="contInfa = contInfa + 1" ng-model="tour.count_infantil"></i>
 						<!-- <button ng-init="countAdult = 1" ng-click="countAdult = countAdult + 1">+</button> -->
-					</div>	
-					   
+					</div>
+
 				</div>
 				<div class="border-div"></div>
 				<div class="valor-total-view">
@@ -540,8 +678,8 @@
 					</div>
 					<div class="coluna-peq">
 						<span class="valor-total-label text-right" ng-model="tour.price_total_tour">R$ @{{tour.price_total_tour = valor1 + valor2 | number: 2}}</span>
-					</div>			
-					
+					</div>
+
 				</div>
 			</div>
 			<!-- Botão de Add ao Carrinho -->
@@ -550,7 +688,7 @@
 				<input type="hidden" value="@{{tour.cart_id = cart}}" ng-init="cart = {{ $tourInfo->cart[0]->id }}" ng-model="tour.cart_id">
 				<input type="hidden" value="@{{tour.title = title_tour}}" ng-init="title_tour = '{{ $tourInfo->title_tour }}'" ng-model="tour.title">
 				<button class="btn btn-primary btn-block btn-add-shopcar" ng-click="addListCart(tour)"><i class="fa fa-shopping-cart"></i>Adicionar ao Carrinho</button>
-				
+
 			</div>
 			<!-- ********************************************** -->
 			<!-- Informações para os Clientes sobre o Passeio -->
@@ -561,7 +699,7 @@
 				<p>2- Cancelamento para compra no Cartão até 24 horas antes do passeio. Você recebe 85% do valor.</p>
 
 				<p>3- Cancelamento depois de 24 horas, ou no dia do passeio caracteriza NO/SHOW reembolsamos 50% do valor total pago.</p>
-				
+
 				<p>4- Você receberá a confirmação com voucher e terá acesso ao eBook de Bônus, logo depois de efetuar sua compra.</p>
 
 			</div>
@@ -572,17 +710,17 @@
 			</div>
 
 		</section>
-		
+
 		<section id="avaliacoes">
-			
-			
+
+
 		</section>
 		<section id="relacionados">
-			
+
 		</section>
 
 	</main>
-	
+
 	<!-- Fim do Main -->
 	<!-- Inicio do Footer -->
 	<div class="footer_init">
@@ -612,28 +750,28 @@
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
-	<footer>		
+	<footer>
 		<div style="background: #fff; margin-top: 0px;" class="footer_secund">
 			<div class="container">
 				<div style="margin-top: 25px;" class="desc_footer">
 					<h4>Natal Praias 2016 Todos os Direitos Reservados CNPJ: 00.893.767/0001-97</h4>
-				</div>				
+				</div>
 				<div class="redesociais">
 					<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-					
-				</div>				
-			</div>			
-		</div>		
+
+				</div>
+			</div>
+		</div>
 
 	</footer>
 
-	
+
 	<script>
 		//$('.testPo').webuiPopover({title:'Title',content:'Content'});
 		$('.testPo').webuiPopover({url:'#ShopCart', width:560, height:300, animation:'pop'});
@@ -655,7 +793,7 @@
 		    new Date(2017,3,29)
 		  ],
 		});
-		
+
 		var $input = $('.datepicker').pickadate({});
 		var picker = $input.pickadate('picker');
 
@@ -669,7 +807,7 @@
 	</script>
 	<script src="{{ url('layout/js/scripts.js') }}"></script>
 	<script src="{{ url('layout/js/vendors/bootstrap.js') }}"></script>
-	
+
 	<!-- Fim do Footer -->
 </body>
 </html>

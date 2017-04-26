@@ -1,35 +1,35 @@
-$(function(){   
-	var nav = $('header');   
-	$(window).scroll(function () { 
-		if ($(this).scrollTop() > 150) { 
-			nav.addClass("menu-fixo");             
-		} else { 
+$(function(){
+	var nav = $('header');
+	$(window).scroll(function () {
+		if ($(this).scrollTop() > 150) {
+			nav.addClass("menu-fixo");
+		} else {
 			nav.removeClass("menu-fixo");
 
-			} 
+			}
 	});
 
-    var cart = $('.header_barra');   
-    $(window).scroll(function () { 
-        if ($(this).scrollTop() > 150) { 
-            cart.addClass("barramenu");             
-        } else { 
+    var cart = $('.header_barra');
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 150) {
+            cart.addClass("barramenu");
+        } else {
             cart.removeClass("barramenu");
 
-            } 
-    }); 
+            }
+    });
 
-        
+
 });
 
-$('nav#menu_mobile').mmenu();
+//$('nav#menu_mobile').mmenu();
 
 $(".owl-carousel").owlCarousel({
 	center: true,
 	animateOut: 'lightSpeedOut',
     animateIn: 'lightSpeedIn',
-    nav: true,    
-    lazyLoad: true,	
+    nav: true,
+    lazyLoad: true,
     items:1,
     loop:true,
     margin:10,

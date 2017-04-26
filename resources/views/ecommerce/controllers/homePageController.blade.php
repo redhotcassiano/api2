@@ -1,6 +1,5 @@
-
 <script>
-	angular.module('home').controller('homeController', function($scope, $http, homeService){
+	angular.module('home').controller('homeController', function($scope, $http, homeService, ngDialog, toastr){
 		//Variaveis;
 		console.log("test ok");
 
@@ -17,12 +16,29 @@
 
 		$scope.carts = [];
 
+		//popup
+		var clickToOpen = function () {
+        ngDialog.open({ template: 'dialog01', className: 'ngdialog-theme-default' });
+    };
+
+		//clickToOpen();
+
+		$scope.formLogin = function(){
+			ngDialog.open({ template: 'form-login', className: 'ngdialog-theme-default'});
+		}
+
+
+
+		//toast
+		var toast = toastr.success('Hello world!', 'Toastr fun!');
+		//toastr.refreshTimer(toast, 5000);
+
 
 		//Funções;
 		var listarCart = function(id){
-			homeService.getCart(id).then(function onSuccess(response){			
-				$scope.carts = response.data;			
-				//console.log($scope.carts);				
+			homeService.getCart(id).then(function onSuccess(response){
+				$scope.carts = response.data;
+				//console.log($scope.carts);
 			}, function onError(response){
 				console.log(response.data + " erro: " + response.statusText);
 				$scope.carts = [];
@@ -31,9 +47,9 @@
 		};
 
 		var getSessionTour = function(name_session, $campo){
-			homeService.getSession(name_session).then(function onSuccess(response){			
-				$scope.name_user = "test: " + response.data;			
-				//console.log($scope.carts);				
+			homeService.getSession(name_session).then(function onSuccess(response){
+				$scope.name_user = "test: " + response.data;
+				//console.log($scope.carts);
 			}, function onError(response){
 				console.log(response.data + " erro: " + response.statusText);
 				return response.statusText;
@@ -52,15 +68,27 @@
 			});
 		}
 
+		var saveIpClient = function(ip){
+			homeService.saveIpClient("ip_user", ip).then(function onSuccess(response){
+				//console.log($scope.carts);
+			}, function onError(response){
+				console.log(response.data + " erro: " + response.statusText);
+
+			});
+		}
+
 		//Buscar a Localização do usuario;
 		$.getJSON("http://ip-api.com/json/?callback=?", function(data) {
 			$scope.localization = data;
 			console.log($scope.localization);
 			createCart($scope.localization.query);
+			saveIpClient($scope.localization.query);
 		});
 
+
+
 		//Buscar Passeios Novidades;
-		
+
 		var getToursNews = function(){
 			homeService.getToursNews().then(function onSucess(response){
 				console.log('Tours: '+response.data);
@@ -94,7 +122,7 @@
 				$scope.toursSearch = null;
 			});
 		};
-		
+
 		GetSearch();
 
 		$scope.searchNow = function(data){
@@ -105,16 +133,16 @@
 
 		$scope.saveEmail = function(data){
 			console.log('Salvar: '+data)
-			
+
 			homeService.saveNewEmail(data).then(function onSucess(response){
-				console.log('Email: '+response.data);				
+				console.log('Email: '+response.data);
 
 			}, function onError(response){
-				console.log('EmailErro: '+response.data);				
+				console.log('EmailErro: '+response.data);
 			});
 		};
 
-		
+
 
 		$scope.saveNewEmail = function(email){
 			console.log(email);
@@ -123,10 +151,10 @@
 			}
 
 			homeService.saveNewEmail(email).then(function onSucess(response){
-				console.log('Email: '+response.data);				
+				console.log('Email: '+response.data);
 
 			}, function onError(response){
-				console.log('EmailErro: '+response.data);				
+				console.log('EmailErro: '+response.data);
 			});
 
 			$scope.newEmail = null;
@@ -139,6 +167,6 @@
 
 
 
-		
+
 	});
 </script>

@@ -12,11 +12,11 @@ class Cart extends Model
     protected $fillable = ['id_user_ecommerce', 'ip_user', 'total_price'];
 
     public function allCarts(){
-        return self::all();         
+        return self::all();
     }
 
     public function getCart($id){
-        return self::find($id); 
+        return self::find($id);
     }
 
     public function saveNewCart($id_user_ecommerce, $ip_user){
@@ -27,7 +27,7 @@ class Cart extends Model
                 ->where('id_user_ecommerce', $id_user_ecommerce)
                 ->get();
 
-        if($data != '[]'){            
+        if($data != '[]'){
             return false;
         }else{
             $cart = new Cart();
@@ -50,60 +50,65 @@ class Cart extends Model
     }
 
     public function getCartAuth($ip, $id_user){
-        $data = self::where('ip_user', $ip)
-                ->where('id_user_ecommerce', $id_user)
-                ->get();
+        if($id_user == 1){
+          $data = self::where('ip_user', $ip)
+                        ->get();
+        }else{
+          $data = self::where('id_user_ecommerce', $id_user)
+                  ->get();
+        }
+
 
         return $data;
     }
 
     public function getListCart($id){
         $listCart = self::find($id)->listCart;
-       
+
         return $listCart;
     }
-   
+
 
     public function saveCart(){
         $input = Input::all();
-        $cart = new Cart();       
-        $cart->fill($input);              
-        //$tour->title_tour = $input['title_tour'];      
-        
+        $cart = new Cart();
+        $cart->fill($input);
+        //$tour->title_tour = $input['title_tour'];
+
         $cart->save();
         return $cart;
     }
 
     public function updateCart($id){
         $input = Input::all();
-        $cart  = self::find($id);       
-        $cart->fill($input); 
-        //$tour->title_tour = $input['title_tour']."-test";      
-        //$tour->title_tour = $input['title_tour'];  
+        $cart  = self::find($id);
+        $cart->fill($input);
+        //$tour->title_tour = $input['title_tour']."-test";
+        //$tour->title_tour = $input['title_tour'];
         if($cartcart->save()){
             return $cart;
         }else{
             return false;
-        }   
-        
+        }
+
     }
 
     public function updateTotal($id, $total){
-        
+
         $cart = self::where('id', $id)
-                    ->update(['total_price' => $total]); 
+                    ->update(['total_price' => $total]);
 
         if($cart){
             return $cart;
         }else{
             return false;
-        } 
+        }
     }
 
 
     public function listCart(){
 
-    	return $this->hasMany(ListCart::class, 'cart_id'); 
+    	return $this->hasMany(ListCart::class, 'cart_id');
     }
 
     public function getTour($id, $data){

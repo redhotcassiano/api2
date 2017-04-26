@@ -6,12 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Natal Praias</title>
 	<!--<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">-->
-	
+
 	<link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ url('layout/js/vendors/popover/jquery.webui-popover.min.css') }}">
 	<link rel="stylesheet" href="{{ url('layout/css/plugins.css') }}">
-	<link rel="stylesheet" href="{{ url('assets/css/icons/icomoon/styles.css') }}">		
+	<link rel="stylesheet" href="{{ url('assets/css/icons/icomoon/styles.css') }}">
 	<script src="{{ url('layout/js/vendors/jquery.min.js') }}"></script>
     <script src="{{ url('layout/css/owlcarousel/owl.carousel.js') }}"></script><script src=""></script>
 
@@ -31,31 +31,39 @@
 	<script src="{{ url('layout/js/vendors/mmenu.all.min.js') }}"></script>
 
 	<!-- **************** App AngularJS ******************** -->
-	<script src="{{ url('app/vendors/angular-sanitize/angular-sanitize.min.js') }}"></script>	
+	<script src="{{ url('app/vendors/angular-sanitize/angular-sanitize.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ url('app/vendors/ng-notify/dist/ng-notify.min.css') }}">
 	<script src="{{ url('app/vendors/ng-notify/dist/ng-notify.min.js') }}"></script>
 	<script src="{{ url('layout/js/vendors/angular-rateit/dist/ng-rateit.min.js') }}"></script>
 	<script src="{{ url('app/vendors/angular-autocomplete/angucomplete-alt.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/angular-rateit/dist/ng-rateit.css') }}">
-	
+	<!--Dialog-->
+	<link rel="stylesheet" href="{{ url('layout/js/vendors/ng-dialog/css/ngDialog.min.css') }}">
+	<link rel="stylesheet" href="{{ url('layout/js/vendors/ng-dialog/css/ngDialog-theme-default.min.css') }}">
+	<script src="{{ url('layout/js/vendors/ng-dialog/js/ngDialog.min.js') }}"></script>
+
+	<!--Toast-->
+	<link rel="stylesheet" type="text/css" href="{{ url('layout/js/vendors/angular-toastr/dist/angular-toastr.css') }}" />
+	<script type="text/javascript" src="{{ url('layout/js/vendors/angular-toastr/dist/angular-toastr.tpls.js') }}"></script>
+
 	<script src="{{ url('layout/js/app/app.js') }}"></script>
 
-
-	<!--- Controles -->	
+	<!--- Controles -->
 	<script src="{{ url('app/vendors/angular-locale-pt-br/angular-locale_pt-br.js') }}"></script>
 
 	<!-- Service -->
 	<script src="{{ url('layout/js/services/homeService.js') }}"></script>
 
 
-    
+
   	<!-- ***************** CSS MAIN **************** -->
-  	<link rel="stylesheet" href="{{ url('layout/css/home.css') }}"><link rel="stylesheet" href=""> 
+  	<link rel="stylesheet" href="{{ url('layout/css/home.css') }}"><link rel="stylesheet" href="">
 
   	<!-- Controller da Página do produto -->
 	@include('ecommerce/controllers/homePageController')
-	
+
 	<!-- /Controller da Página do produto -->
+
 	<style>
 		.cartfixo{
 			position: absolute;
@@ -68,7 +76,7 @@
 		}
 
 		.basket{
-			font-size: 8em;			
+			font-size: 8em;
 			color: #fe5e22;
 		}
 
@@ -111,16 +119,88 @@
 		    position: absolute;
 		}
 
-		
+
 
 	</style>
-  	
+
+<!-- Dialogs -->
+	<script type="text/ng-template" id="dialog01">
+    <h1>Template heading</h1>
+    <p>Content goes here</p>
+	</script>
+
+	<script type="text/ng-template" id="form-login">
+		<form role="form" method="POST" action="{{ route('login') }}">
+				{{ csrf_field() }}
+				<div class="login-form">
+						<div class="text-center">
+								<div class=""><img src="{{ url('layout/img/logo_natalpraias.png')}}" alt="natal praias"></div>
+								<h5 class="content-group-lg"><small class="display-block"></small></h5>
+						</div>
+
+						<div class="form-group has-feedback has-feedback-left">
+
+								<input id="email" type="email" class="form-control input-lg" name="email" value="{{ old('email') }}" placeholder="E-mail" required autofocus>
+
+								@if ($errors->has('email'))
+										<span class="help-block">
+												<strong>{{ $errors->first('email') }}</strong>
+										</span>
+								@endif
+								<div class="form-control-feedback">
+										<i class="icon-user text-muted"></i>
+								</div>
+						</div>
+
+						<div class="form-group has-feedback has-feedback-left">
+								<input id="password" type="password" class="form-control input-lg" placeholder="Password" name="password" required>
+
+								@if ($errors->has('password'))
+										<span class="help-block">
+												<strong>{{ $errors->first('password') }}</strong>
+										</span>
+								@endif
+								<div class="form-control-feedback">
+										<i class="icon-lock2 text-muted"></i>
+								</div>
+						</div>
+
+						<div class="form-group login-options">
+								<div class="row">
+										<div class="col-sm-6">
+												<label class="checkbox-inline">
+
+														<input type="checkbox" name="remember" class="styled" {{ old('remember') ? 'checked' : '' }}>
+														Lembra-me
+												</label>
+										</div>
+
+										<div class="col-sm-6 text-right">
+												<a class="btn btn-link" href="{{ route('password.request') }}">
+														Esqueceu sua sehna?
+												</a>
+										</div>
+								</div>
+						</div>
+
+						<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block btn-lg">Login <i class="icon-arrow-right14 position-right"></i></button>
+						</div>
+						<a href="{{ url('web/social/google') }}">Acessar com google</a>
+						<a href="{{ url('web/social/facebook') }}">Acessar com facebook</a>
+
+				</div>
+		</form>
+		<!-- /advanced login -->
+	</script>
+
+
 </head>
 
 <body>
-	
+
 	<!-- Inicio do Header -->
-	<header>		
+	<header>
 		<div class="header_barra  menufixo">
 			<div class="container-fluid">
 				<div class="logo">
@@ -133,7 +213,7 @@
 							<li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Início</a></li>
 							<li><a href="#" class="listheart"><i class="fa fa-heart" aria-hidden="true"></i> Lista de Desejos</a></li>
 							<li><a href="#" class="testPo" data-placement="bottom" ng-click="showListCar()"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Carrinho</a></li>
-							<li ng-if="name_user == null"><a href="{{ url('login') }}"><i class="fa fa-user" aria-hidden="true"></i>Entrar </a></li>
+							<li ng-if="name_user == null"><a href="#login" ng-click="formLogin()"><i class="fa fa-user" aria-hidden="true"></i>Entrar </a></li>
 							<li ng-if="name_user != null"><a href="{{ url('minha-pagina') }}"><i class="fa fa-user" aria-hidden="true"></i>@{{ name_user }}</a></li>
 							<li><a class="btn" href="#">Cadastre-se</a></li>
 							<li><a class="btn-idioma" href="#"><span><img style="margin-bottom: 3px;" src="{{ url('layout/img/portugues.png') }}" alt="idioma português"> Português</span></a></li>
@@ -144,27 +224,27 @@
 						<li class="toogle_mobile"><a href="#menu_mobile"><span></span></a></li>
 					</ul>
 
-				</div>					
+				</div>
 			</div>
 
-			<nav id="menu_mobile" style="z-index: 99;">
+			<!--<nav id="menu_mobile" style="z-index: 99;">
 				<ul style="margin-top: 40px;">
 					<li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Início</a></li>
 					<li><a href="#" class="listheart"><i class="fa fa-heart" aria-hidden="true"></i> Lista de Desejos</a></li>
 					<li><a href="#" class="carshop"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Carrinho</a></li>
 					<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Entrar</a></li>
 					<li><a class="btn btn-primary" href="#">Cadastre-se</a></li>
-					<li><a class="btn-idioma" href="#"><span><img style="margin-bottom: 3px;" src="{{ url('layout/img/portugues.png') }}" alt="idioma português"> Português</span></a></li> 
+					<li><a class="btn-idioma" href="#"><span><img style="margin-bottom: 3px;" src="{{ url('layout/img/portugues.png') }}" alt="idioma português"> Português</span></a></li>
 				</ul>
-			</nav>	
+			</nav>-->
 
 		</div>
 		<!-- Cart -->
 		<div id="ShopCart">
 			<div class="painel painel-default" ng-repeat="listCart in carts">
 				<div ng-repeat="cart_info in listCart.cart">
-					<div ng-repeat="tour_info in listCart.tour">					
-						<div class="row">		    		
+					<div ng-repeat="tour_info in listCart.tour">
+						<div class="row">
 				    		<div class="col-md-4">
 				    			image
 				    		</div>
@@ -175,18 +255,18 @@
 				    			@{{cart_info.price_total_tour}}
 				    		</div>
 				    	</div>
-						<hr> 
-					</div>								
+						<hr>
+					</div>
 				</div>
-										
-			</div>	
+
+			</div>
 			<div class="row" ng-if="carts.length > 0">
 				<div class="col-md-12">
 					<button class="btn btn-primary btn-block">Finalizar Compra</button>
-				</div>				
-			</div> 
+				</div>
+			</div>
 
-			<div class="painel painel-default" ng-if="carts.length < 1" style="z-index: -1; position: relative; transition: 0;"> 
+			<div class="painel painel-default" ng-if="carts.length < 1" style="z-index: -1; position: relative; transition: 0;">
 				<div class="col-md-12">
 					<div class="icon-bascket">
 						<i class="basket"></i>
@@ -196,17 +276,17 @@
 						<p>Navegue pelo site ou utilize a busca para encontrar os melhores passeios e adicione no seu carrinho! </p>
 					</div>
 				</div>
-				
-			</div>  	  	
-		    
+
+			</div>
+
 		</div>
 		<!-- /Cart -->
 		<!-- Inicio do container -->
-		<div class="container" ng-repeat="home in data">			
+		<div class="container" ng-repeat="home in data">
 			<div class="title_page_home">
 				<h2> @{{ home.subtitle_home }} </h2>
 				<h1> @{{ home.title_home }} </h1>
-				
+
 				<div class="search_home">
 					<button class="btn btn-primary-home" ng-click="searchNow(tourSearch)"><i class="fa fa-search" aria-hidden="true"></i></button>
 					<angucomplete-alt id="ex1"
@@ -219,16 +299,16 @@
 		              description-field="Pesquisar Passeio"
 		              minlength="1"
 		              input-class="input_procurar_home"
-		              ></angucomplete-alt>              
+		              ></angucomplete-alt>
 					<!--<input class="input_procurar_home" type="text" placeholder="Para onde você vai viajar?">	-->
-				    
-				</div>				
-			</div>		
+
+				</div>
+			</div>
 		</div>
 		<!-- Fim do containner -->
 
 	</header>
-	
+
 	<!-- Fim do Header -->
 	<!-- Inicio do Main -->
 	<main>
@@ -246,10 +326,10 @@
 				<input type="text" name="horario_home" placeholder="Horario">
 				<select name="opcoes" id="opcoes">
 					<option value="">Adulto</option>
-					<option value="">Adulto e Criança</option>				
-				</select>			
-				<a href="#" class="btn btn-primary">Reserva Agora</a>					
-			</div>			
+					<option value="">Adulto e Criança</option>
+				</select>
+				<a href="#" class="btn btn-primary">Reserva Agora</a>
+			</div>
 		</div>
 		-->
 		<!-- Fim do filtros_home -->
@@ -264,7 +344,7 @@
 				<div class="container">
 					<div class="row">
 						<!--- Area Test -->
-						<div ng-repeat="tourN in toursNews.tours">							
+						<div ng-repeat="tourN in toursNews.tours">
 							<article class="card-product-main">
 								<a href="tour/@{{tourN.slug_tour}}" class="product thumbnail" title="passeio natal" alt="passeio natal">
 									<!-- Badges -->
@@ -281,11 +361,11 @@
 									<!--*****************-->
 									<!-- Image Passeio -->
 									<div ng-repeat="img in toursNews.imgs">
-										<div ng-if="img.token_tour == tourN.token_tour">		
+										<div ng-if="img.token_tour == tourN.token_tour">
 											<img src="img/@{{img.name}}" class="" alt="passeio natal" width="313" height="195" style="width: 313px !important;">
-										</div>										
+										</div>
 									</div>
-									
+
 									<!--***************-->
 									<!-- Caption -->
 									<div class="caption">
@@ -306,23 +386,23 @@
 										<div class="comprados-semana-passeio">
 											<i class="fa fa-users"></i>
 											<span>38 Comprados na última semana</span>
-										</div>										
-										
+										</div>
+
 									</div>
 									<!--*********-->
 
 								</a>
 							</article>
-							
+
 						</div>
-						<!--- /Area Test -->					
+						<!--- /Area Test -->
 
 					</div>
 				</div>
 				<!-------------------------------->
 
 			</div>
-			
+
 			<!-- Fim da Section de Cards -->
 		</section>
 
@@ -333,7 +413,7 @@
 				<!-- Inicio da Section de Cards -->
 				<div class="container">
 					<div class="row">
-						<div ng-repeat="tourV in toursViews.tours">							
+						<div ng-repeat="tourV in toursViews.tours">
 							<article class="card-product-main">
 								<a href="tour/@{{tourV.slug_tour}}" class="product thumbnail" title="passeio natal" alt="passeio natal">
 									<!-- Badges -->
@@ -350,11 +430,11 @@
 									<!--*****************-->
 									<!-- Image Passeio -->
 									<div ng-repeat="img in toursViews.imgs">
-										<div ng-if="img.token_tour == tourV.token_tour">		
+										<div ng-if="img.token_tour == tourV.token_tour">
 											<img src="img/@{{img.name}}" class="" alt="passeio natal" width="313" height="195" style="width: 313px !important;">
-										</div>										
+										</div>
 									</div>
-									
+
 									<!--***************-->
 									<!-- Caption -->
 									<div class="caption">
@@ -375,25 +455,25 @@
 										<div class="comprados-semana-passeio">
 											<i class="fa fa-users"></i>
 											<span>38 Comprados na última semana</span>
-										</div>										
-										
+										</div>
+
 									</div>
 									<!--*********-->
 
 								</a>
 							</article>
-							
-						</div>					
+
+						</div>
 
 					</div>
 				</div>
 				<!----------------- ------------->
 
 			</div>
-			
+
 			<!-- Fim da Section de Cards -->
-		</section>		
-		
+		</section>
+
 		<section id="newsletter" name="newsletter">
 			<div class="container">
 				<div class="title-newsletter">NEWSLETTER</div>
@@ -405,12 +485,12 @@
 					<input type="email" name="n_email" id="n_email" placeholder="Informe seu e-mail" ng-model="newEmail.n_email">
 					<input type="hidden" name="status" id="status" ng-model="newEmail.status" value="@{{newEmail.status = 1}}">
 					<button class="btn btn-primary" ng-click="saveNewEmail(newEmail)">Enviar</button>
-				</div>		
-				</form>	
-			</div>			
+				</div>
+				</form>
+			</div>
 		</section>
 	</main>
-	
+
 
 	<!-- Inicio do Footer -->
 	<div class="footer_init">
@@ -440,28 +520,28 @@
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
-	<footer>		
+	<footer>
 		<div style="background: #fff" class="footer_secund">
 			<div class="container">
 				<div class="desc_footer">
-					<h4>Natal Praias - RZ MARKETING TURISTICO 2017 Todos os Direitos Reservados CNPJ: 27.230.533/0001-16</h4>
-				</div>				
+					<h4>Natal Praias - RZ MARKETING TURISTICO 2017 © Todos os Direitos Reservados CNPJ: 27.230.533/0001-16</h4>
+				</div>
 				<div class="redesociais">
 					<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
 					<a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-				</div>				
-			</div>			
-		</div>		
+				</div>
+			</div>
+		</div>
 
 	</footer>
-	<script> 
-			    
-            //popover           
+	<script>
+
+            //popover
 			//$('.testPo').webuiPopover({title:'Title',content:'Content'});
 			//$('.testPo').webuiPopover({url:'#ShopCart', width:560, height:300, animation:'pop'});
 
@@ -475,7 +555,7 @@
 			    ]
 			});
 
-           
+
 
           </script>
 

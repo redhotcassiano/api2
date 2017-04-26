@@ -13,26 +13,26 @@ class SeasonTours extends Model
      protected $fillable = ['token_tour', 'id_user_create', 'begin_season', 'end_season', 'price_cost'];
 
     public function allSeason(){
-        return self::all(); 
+        return self::all();
     }
 
     public function getSeason($id){
-        return self::find($id); 
+        return self::find($id);
     }
 
     public function getSeasonsTour($token){
-    	
+
     	$data = self::where('token_tour', $token)->get();
 
     	return $data;
-    }
+    }		
 
      public function saveSeason(){
         $input = Input::all();
-        $season = new SeasonTours();       
-        $season->fill($input);              
-        //$tour->title_tour = $input['title_tour'];      
-          
+        $season = new SeasonTours();
+        $season->fill($input);
+        //$tour->title_tour = $input['title_tour'];
+
         $season->save();
         return $season;
     }
