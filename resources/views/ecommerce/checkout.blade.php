@@ -336,25 +336,26 @@
 						<div class="painel-body" ng-repeat="list in listInfo">
 							<article class="row product-row">
 								<!-- Parte esquerda -->
-								<div class="part-left">
-									<div class="media">
-										<div ng-repeat="img in list.Tour.imgs">
-											<div ng-if="img.token_tour == list.Tour.tours[0].token_tour">
-												<div class="media-left">
-													<img src="img/@{{img.name}}" alt="@{{list.Tour.tours[0].title_tour}}" class="picture" width="194" height="120">
+								<div ng-repeat="img in list.Tour.imgs">
+									<div ng-if="img.token_tour == list.Tour.tours[0].token_tour">
+											<div class="part-left">
+												<div class="media">
+															<div class="media-left">
+																<img src="img/@{{img.name}}" alt="@{{list.Tour.tours[0].title_tour}}" class="picture" width="194" height="120">
+															</div>
+
+													<div class="media-body">
+														<h3 class="media-title">@{{list.Tour.tours[0].title_tour}}</h3>
+														<h6 class="text-muted">Pipa - Natal</h6>
+														<a href="#" class="text-muted remove-item-cart">
+															<i class="fa fa-times"></i>
+															<span>Remover</span>
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="media-body">
-											<h3 class="media-title">@{{list.Tour.tours[0].title_tour}}</h3>											
-											<h6 class="text-muted">Pipa - Natal</h6>
-											<a href="#" class="text-muted remove-item-cart">
-												<i class="fa fa-times"></i>
-												<span>Remover</span>
-											</a>
-										</div>
 									</div>
-								</div>
 								<!-- Parte Direita -->
 								<div class="part-right">
 									<label for="" ng-init="">@{{list.date_tour | date: 'dd/MM/yyyy' }}<br><br>segunda-feira</label>
