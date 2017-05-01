@@ -9,7 +9,8 @@
         "consoletvs/charts": "4.*",
         "laravel/framework": "5.4.*",
         "laravel/socialite": "^3.0",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "jhernandes/ipag-webservice-1.0-php":"dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

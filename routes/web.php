@@ -158,6 +158,9 @@ Route::group(['prefix' => 'v1'], function(){
 	Route::put('cupons', 'Checkout\CuponsController@update');
 	Route::delete('cupons', 'Checkout\CuponsController@destroy');
 
+	Route::get('payman', 'PayController@index');
+	Route::get('payman/consulta', "PayController@consulta");
+
 });
 
 Auth::routes();

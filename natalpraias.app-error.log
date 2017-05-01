@@ -1,3 +1,73 @@
 2017/04/22 13:32:58 [error] 1136#1136: *258 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot use [] for reading in /var/www/natalpraias.app/api2/storage/framework/views/36510cb4de5f565fe170c2fc2b2a4818e3ecc67a.php on line 322" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /view/checkout HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
 2017/04/22 13:33:14 [error] 1136#1136: *258 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot use [] for reading in /var/www/natalpraias.app/api2/storage/framework/views/36510cb4de5f565fe170c2fc2b2a4818e3ecc67a.php on line 322" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /view/checkout HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
 2017/04/22 13:34:47 [error] 1135#1135: *300 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot use [] for reading in /var/www/natalpraias.app/api2/app/Http/Controllers/CheckoutController.php on line 47" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /view/checkout HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
+2017/05/01 15:22:44 [error] 1124#1124: *658 FastCGI sent in stderr: "PHP message: PHP Warning:  Uncaught ErrorException: require(../../../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php:5
+Stack trace:
+#0 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(../../....', '/var/www/natalp...', 5, Array)
+#1 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): require()
+#2 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(414): include('/var/www/natalp...')
+#3 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/var/www/natalp...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Http\\Contro...')
+#5 [internal function]: spl_autoload_call('App\\Http\\Contro...')
+#6 /var/www/natalpraias.app/api2/vendor/laravel/framework/src/Illuminate/Container/Container.php(719): ReflectionClass->__construct('...
+PHP message: PHP Fatal error:  main(): Failed opening required '../../../vendor/autoload.php' (include_path='.:/usr/share/php') in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php on line 5" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /v1/payman HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
+2017/05/01 15:23:16 [error] 1124#1124: *658 FastCGI sent in stderr: "PHP message: PHP Warning:  Uncaught ErrorException: require(../../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php:5
+Stack trace:
+#0 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(../../v...', '/var/www/natalp...', 5, Array)
+#1 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): require()
+#2 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(414): include('/var/www/natalp...')
+#3 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/var/www/natalp...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Http\\Contro...')
+#5 [internal function]: spl_autoload_call('App\\Http\\Contro...')
+#6 /var/www/natalpraias.app/api2/vendor/laravel/framework/src/Illuminate/Container/Container.php(719): ReflectionClass->__construct('App...
+PHP message: PHP Fatal error:  main(): Failed opening required '../../vendor/autoload.php' (include_path='.:/usr/share/php') in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php on line 5" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /v1/payman HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
+2017/05/01 15:23:32 [error] 1124#1124: *658 FastCGI sent in stderr: "PHP message: PHP Warning:  Uncaught ErrorException: require(vendor/autoload.php): failed to open stream: No such file or directory in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php:5
+Stack trace:
+#0 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(vendor/...', '/var/www/natalp...', 5, Array)
+#1 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): require()
+#2 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(414): include('/var/www/natalp...')
+#3 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/var/www/natalp...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Http\\Contro...')
+#5 [internal function]: spl_autoload_call('App\\Http\\Contro...')
+#6 /var/www/natalpraias.app/api2/vendor/laravel/framework/src/Illuminate/Container/Container.php(719): ReflectionClass->__construct('App\\Http...
+PHP message: PHP Fatal error:  main(): Failed opening required 'vendor/autoload.php' (include_path='.:/usr/share/php') in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php on line 5" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /v1/payman HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
+2017/05/01 15:24:39 [error] 1124#1124: *670 FastCGI sent in stderr: "PHP message: PHP Warning:  Uncaught ErrorException: require(../../../../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php:5
+Stack trace:
+#0 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(../../....', '/var/www/natalp...', 5, Array)
+#1 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): require()
+#2 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(414): include('/var/www/natalp...')
+#3 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/var/www/natalp...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Http\\Contro...')
+#5 [internal function]: spl_autoload_call('App\\Http\\Contro...')
+#6 /var/www/natalpraias.app/api2/vendor/laravel/framework/src/Illuminate/Container/Container.php(719): ReflectionClass->__construc...
+PHP message: PHP Fatal error:  main(): Failed opening required '../../../../vendor/autoload.php' (include_path='.:/usr/share/php') in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php on line 5" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /v1/payman HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
+2017/05/01 15:24:55 [error] 1124#1124: *670 FastCGI sent in stderr: "PHP message: PHP Warning:  Uncaught ErrorException: require(../../../../../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php:5
+Stack trace:
+#0 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(../../....', '/var/www/natalp...', 5, Array)
+#1 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): require()
+#2 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(414): include('/var/www/natalp...')
+#3 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/var/www/natalp...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Http\\Contro...')
+#5 [internal function]: spl_autoload_call('App\\Http\\Contro...')
+#6 /var/www/natalpraias.app/api2/vendor/laravel/framework/src/Illuminate/Container/Container.php(719): ReflectionClass->__const...
+PHP message: PHP Fatal error:  main(): Failed opening required '../../../../../vendor/autoload.php' (include_path='.:/usr/share/php') in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php on line 5" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /v1/payman HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
+2017/05/01 15:25:26 [error] 1124#1124: *670 FastCGI sent in stderr: "PHP message: PHP Warning:  Uncaught ErrorException: require(../../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php:5
+Stack trace:
+#0 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(../../v...', '/var/www/natalp...', 5, Array)
+#1 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): require()
+#2 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(414): include('/var/www/natalp...')
+#3 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/var/www/natalp...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Http\\Contro...')
+#5 [internal function]: spl_autoload_call('App\\Http\\Contro...')
+#6 /var/www/natalpraias.app/api2/vendor/laravel/framework/src/Illuminate/Container/Container.php(719): ReflectionClass->__construct('App...
+PHP message: PHP Fatal error:  main(): Failed opening required '../../vendor/autoload.php' (include_path='.:/usr/share/php') in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php on line 5" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /v1/payman HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"
+2017/05/01 15:25:44 [error] 1124#1124: *670 FastCGI sent in stderr: "PHP message: PHP Warning:  Uncaught ErrorException: require(vendor/autoload.php): failed to open stream: No such file or directory in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php:5
+Stack trace:
+#0 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(vendor/...', '/var/www/natalp...', 5, Array)
+#1 /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php(5): require()
+#2 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(414): include('/var/www/natalp...')
+#3 /var/www/natalpraias.app/api2/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/var/www/natalp...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Http\\Contro...')
+#5 [internal function]: spl_autoload_call('App\\Http\\Contro...')
+#6 /var/www/natalpraias.app/api2/vendor/laravel/framework/src/Illuminate/Container/Container.php(719): ReflectionClass->__construct('App\\Http...
+PHP message: PHP Fatal error:  main(): Failed opening required 'vendor/autoload.php' (include_path='.:/usr/share/php') in /var/www/natalpraias.app/api2/app/Http/Controllers/PayController.php on line 5" while reading response header from upstream, client: 127.0.0.1, server: natalpraias.app, request: "GET /v1/payman HTTP/1.1", upstream: "fastcgi://unix:/run/php/php7.0-fpm.sock:", host: "natalpraias.app"

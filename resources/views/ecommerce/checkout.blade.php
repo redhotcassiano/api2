@@ -34,6 +34,8 @@
 
 	<!-- **************** App AngularJS ******************** -->
 	<!-- App Angularjs -->
+	<script data-require="angular-credit-cards@*" data-semver="3.0.1" src="https://rawgit.com/bendrucker/angular-credit-cards/v3.0.1/release/angular-credit-cards.js"></script>
+
 	<script src="{{ url('layout/js/app/app.js') }}"></script>
 
 	<script src="{{ url('app/vendors/angular-sanitize/angular-sanitize.min.js') }}"></script>
@@ -50,9 +52,6 @@
 	<!--Toast-->
 	<link rel="stylesheet" type="text/css" href="{{ url('layout/js/vendors/angular-toastr/dist/angular-toastr.css') }}" />
 	<script type="text/javascript" src="{{ url('layout/js/vendors/angular-toastr/dist/angular-toastr.tpls.js') }}"></script>
-
-
-
 
 	<!--- Controles -->
 
@@ -347,7 +346,7 @@
 													<div class="media-body">
 														<h3 class="media-title">@{{list.Tour.tours[0].title_tour}}</h3>
 														<h6 class="text-muted">Pipa - Natal</h6>
-														<a href="#" class="text-muted remove-item-cart">
+														<a href="#Remove" class="text-muted remove-item-cart" ng-click="deleteList(list.id)">
 															<i class="fa fa-times"></i>
 															<span>Remover</span>
 														</a>
@@ -361,8 +360,8 @@
 									<label for="" ng-init="">@{{list.date_tour | date: 'dd/MM/yyyy' }}<br><br>segunda-feira</label>
 
 									<label for="">@{{list.count_adulto}} adulto(s)<br><br>@{{list.count_crianca}} criança(s)</label>
-									<label for="">96,90<br><br>43,33</label>
-									<label for=""><br>296,00</label>
+									<label for="">@{{list.price_total_adult | number: 2}}<br><br>@{{list.price_total_crian | number: 2}}</label>
+									<label for=""><br>@{{list.price_total_tour}}</label>
 								</div>
 								<div class="endarticle"><hr></div>
 							</article>
@@ -418,7 +417,7 @@
 								<div class="row">
 									<div class="name form-group">
 										<label for="nome">Primeiro Nome</label>
-										<input type="text" class="form-control" name="name" placeholder="Primeiro Nome...">
+										<input type="text" class="form-control" name="name" required="required" ng-pattern="[a-z]+$" placeholder="Primeiro Nome...">
 									</div>
 									<div class="lastname form-group">
 										<label for="sobrenome">Sobrenome</label>
@@ -456,8 +455,30 @@
 									<div class="phone form-group">
 										<input type="text" class="form-control" name="phone" placeholder="XXXX-XXXX">
 									</div>
-									<div class="link-more-phone">
-										<a href="#">Adicionar outro Telefone</a>
+
+									<div ng-show="newPhone >= 2">
+										<div class="ddd-phone form-group">
+											<label for="ddd-phone">Telefone</label>
+											<input type="text" class="form-control" name="ddd-phone" placeholder="XX">
+										</div>
+										<div class="phone form-group">
+											<input type="text" class="form-control" name="phone" placeholder="XXXX-XXXX">
+										</div>
+									</div>
+
+									<div ng-show="newPhone >= 3">
+										<div class="ddd-phone form-group">
+											<label for="ddd-phone">Telefone</label>
+											<input type="text" class="form-control" name="ddd-phone" placeholder="XX">
+										</div>
+										<div class="phone form-group">
+											<input type="text" class="form-control" name="phone" placeholder="XXXX-XXXX">
+										</div>
+									</div>
+
+
+									<div class="link-more-phone" ng-show="newPhone <= 2">
+										<a href="#/novo-telefone" ng-click="plusPhone()">Adicionar outro Telefone</a>
 									</div>
 								</div>
 							</form>
@@ -512,74 +533,89 @@
 
 					<div class="painel painel-default">
 						<div class="painel-body">
-							<div class="row">
-								<div class="number-card form-group">
-									<label for="number-card">Número do cartão de crédito</label>
-									<input type="text" class="form-control" name="number-card" placeholder="xxxx xxxx xxxx xxxx" maxlength="16">
+							<form name="ccForm">
+								<div class="row">
+									<div class="number-card form-group">
+											 <div class="form-group">
+												 <label for="card-number">Número do Cartão</label>
+												 <input type="text" class="form-control" id="cardNumber" cc-format cc-number cc-eager-type name="ccNumber" ng-model="card.number" placeholder="xxxx xxxx xxxx xxxx">
+											 </div>
+									</div>
+
+									<div class="name-card form-group">
+										<label for="name-card">Titular do Cartão</label>
+										<input type="text" class="form-control" name="name-card" placeholder="Titular do Cartão" ng-model="ccForm.nameCard">
+									</div>
+
 								</div>
+								<div class="row">
+									<div class="vaidate-card form-group">
+										<label for="validate-card" style="float: left; width: 100%;">Validade</label>
+										 <input style="width: 50%; float: left;" placeholder="MM" type="text" class="form-control" cc-exp-month name="ccExpMonth" ng-model="card.expiration.month">
+										 <input style="width: 50%; float: left;" placeholder="YY" type="text" class="form-control" cc-exp-year name="ccExpYear" ng-model="card.expiration.year">
+									</div>
 
-								<div class="name-card form-group">
-									<label for="name-card">Titular do Cartão</label>
-									<input type="text" class="form-control" name="name-card" placeholder="Titular do Cartão">
+									<div class="cod-secure-card form-group">
+										<label for="cod-secure-card">Cód de segurança</label>
+										<input type="text" class="form-control" id="cvc" cc-cvc cc-type="ccForm.ccNumber.$ccType" name="cod-secure-card" ng-init="showVerso=false" ng-focus="showVerso = true" ng-blur="showVerso = false" ng-model="card.cvc" maxlength="4">
+									</div>
+
+									<div class="parcelas form-group">
+										<label for="parcelas">Número de parcelas</label><br>
+										<select name="parcelas" class="form-control" id="parcelas">
+											<option value="1">Á vista</option>
+											<option value="2">2x R$ 150,00</option>
+											<option value="3">3x R$ 75,60</option>
+											<option value="4">4x R$ 23,50</option>
+										</select>
+									</div>
+
 								</div>
-
-							</div>
-							<div class="row">
-								<div class="vaidate-card form-group">
-									<label for="validate-card">Validade</label>
-									<input type="text" class="form-control" name="validate-card" placeholder="xx/xx" maxlength="5">
-								</div>
-
-								<div class="cod-secure-card form-group">
-									<label for="cod-secure-card">Cód de segurança</label>
-									<input type="text" class="form-control" name="cod-secure-card" placeholder="xxx" maxlength="3">
-								</div>
-
-								<div class="parcelas form-group">
-									<label for="parcelas">Número de parcelas</label><br>
-									<select name="parcelas" class="form-control" id="parcelas">
-										<option value="brazil">Á vista</option>
-										<option value="brazil">2x R$ 150,00</option>
-										<option value="brazil">3x R$ 75,60</option>
-										<option value="brazil">4x R$ 23,50</option>
-									</select>
-								</div>
-
-							</div>
-
-							<div class="row">
-								<div class="card-info">
-									<div class="card-front">
-										<div class="number-card">
-											0000 0000 0000 0000 <br>
-											00/00 <br>
-											SEU NOME
+							</form>
+								<div class="row">
+									<div class="card-info">
+										<div class="card-front">
+											<div class="number-card" cc-format>
+												<span ng-show="card.number == null">0000 0000 0000 0000</span>
+												<span ng-show="card.number != null">@{{card.number}}</span> <br>
+												<span ng-show="card.expiration.month == null && card.expiration.year == null ">00/00</span>
+												<span ng-show="card.expiration.month != null && card.expiration.year != null ">@{{card.expiration.month}}/@{{card.expiration.year}}</span> <br>
+												<span ng-show="ccForm.nameCard == null">SEU NOME</span>
+												<span ng-show="ccForm.nameCard != null">@{{ccForm.nameCard}}</span>
+													<img src="{{ url('layout/img/visa.png') }}" style="float: right;" alt="visa" class="img-cards" width="45" ng-show="ccForm.ccNumber.$ccEagerType == 'Visa'">
+													<img src="{{ url('layout/img/master.png') }}" style="float: right;" alt="master-card" class="img-cards" width="45" ng-show="ccForm.ccNumber.$ccEagerType == 'MasterCard'">
+											</div>
+										</div>
+										<div class="card-back" style="display: block;" ng-show="showVerso">
+											<div class="cod-secure" style="margin-top: 80px; margin-left: 300px;">
+												<span ng-show="card.cvc == null">000</span>
+												<span ng-show="card.cvc != null">@{{card.cvc}}</span>
+											</div>
 										</div>
 									</div>
-									<div class="card-back">
-										<div class="cod-secure">000</div>
+									<div class="painel-total-venda">
+										<div class="row">
+											<div class="labels">
+												Subtotal<br>
+												Taxas<br>
+												Desconto<br><br>
+												Total<br>
+											</div>
+											<div class="values">
+												R$ 260,00<br>
+												R$ 0,00<br>
+												<span class="desc" ng-show="desconto != null">R$ @{{desconto | number: 2}}</span><br> <br>
+												<span class="desc" ng-show="desconto == null">R$ 0,00</span><br> <br>
+												<span class="total-painel" ng-show="total_validate == null">R$ @{{total_price | number: 2}}</span><br>
+												<span class="total-painel" ng-show="total_validate != null">R$ @{{total_validate | number: 2}}</span><br>
+											</div>
+										</div>
+										<div class="row">
+											<button class="btn btn-primary btn-block">Finalizar compra</button>
+										</div>
 									</div>
 								</div>
-								<div class="painel-total-venda">
-									<div class="row">
-										<div class="labels">
-											Subtotal<br>
-											Taxas<br>
-											Desconto<br><br>
-											Total<br>
-										</div>
-										<div class="values">
-											R$ 260,00<br>
-											R$ 0,00<br>
-											<span class="desc">R$ 0,00</span><br> <br>
-											<span class="total-painel">R$ 260,00</span><br>
-										</div>
-									</div>
-									<div class="row">
-										<button class="btn btn-primary btn-block">Finalizar compra</button>
-									</div>
-								</div>
-							</div>
+
 						</div>
 					</div>
 				</div>

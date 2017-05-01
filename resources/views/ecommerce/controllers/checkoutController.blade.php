@@ -4,6 +4,7 @@
         $id_user = {!! $user_id !!};
         $scope.name_user = "{{ $user_name }}";
         $scope.dateToDay = "{{ $date }}";
+        $scope.showVerso = false;
         console.log($scope.dateToDay);
 
 
@@ -14,6 +15,10 @@
           checkoutCart($scope.localization.query, $id_user);
 
     		});
+
+        $scope.hoverCvc = function(){
+          $scope.showVerso = !$scope.showVerso;
+        };
 
         console.log("test ok");
 
@@ -76,7 +81,8 @@
           checkoutService.validateCupon(cupon).then(function onSuccess(response){
     				var cuponValido = response.data[0];
             var porcentagem_desconto = total_price * cuponValido.porcentCupon / 100;
-            $scope.desconto = total_price - porcentagem_desconto;
+            $scope.desconto = porcentagem_desconto;
+            checkValuesTotal(total_price, $scope.desconto);
     				console.log($scope.desconto);
 
     			}, function onError(response){
@@ -88,6 +94,20 @@
         //Realiza a Compra;
         var finalizarCompra = function(){}
 
+        //Calcula o valor total da Compra;
+
+        var checkValuesTotal = function(total_price, desconto){
+           $scope.total_validate = total_price - desconto;
+        }
+
+
+        //add Novo Telefone;
+        $scope.newPhone = 1;
+
+        $scope.plusPhone = function(){
+          $scope.newPhone = $scope.newPhone + 1;
+          console.log($scope.newPhone);
+        }
 
     });
 </script>
