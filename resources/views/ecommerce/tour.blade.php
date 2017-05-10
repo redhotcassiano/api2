@@ -687,6 +687,8 @@
 				<input type="hidden" value="@{{tour.tour_id = tour_id}}" ng-init="tour_id = {{ $tourInfo->id }}" ng-model="tour.tour_id">
 				<input type="hidden" value="@{{tour.cart_id = cart}}" ng-init="cart = {{ $tourInfo->cart[0]->id }}" ng-model="tour.cart_id">
 				<input type="hidden" value="@{{tour.title = title_tour}}" ng-init="title_tour = '{{ $tourInfo->title_tour }}'" ng-model="tour.title">
+				<input type="hidden" value="@{{tour.price_total_adult = valor1}}" ng-model="tour.price_total_adult">@{{tour.price_total_adult}}
+				<input type="hidden" value="@{{tour.price_total_crian = valor2}}" ng-model="tour.price_total_crian">
 				<button class="btn btn-primary btn-block btn-add-shopcar" ng-click="addListCart(tour)"><i class="fa fa-shopping-cart"></i>Adicionar ao Carrinho</button>
 
 			</div>
