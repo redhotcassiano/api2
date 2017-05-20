@@ -105,8 +105,9 @@ class ToursController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function desativarTour($id, $status)
     {
-        //
+        return $this->tours->desativarTour($id, $status);
+        //return "chamou!";
     }
 }

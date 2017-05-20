@@ -21,8 +21,8 @@ class ImagesTours extends Model
     }
 
     public function saveImages( $token_tour, $name, $type_img, $source_img){
-    	    	
- 		$imgs = new ImagesTours();       
+
+ 		$imgs = new ImagesTours();
         $imgs->token_tour = $token_tour;
         $imgs->name = $name;
         $imgs->type_img = $type_img;
@@ -32,7 +32,7 @@ class ImagesTours extends Model
         }else{
         	return false;
         }
-    	
+
     }
 
      public static function getToken($token){
@@ -43,6 +43,15 @@ class ImagesTours extends Model
 
         return $data;
     }
+
+    public static function getCapa($token){
+        $data = self::where([['token_tour', $token], ['type_img', 'cape']])->get();
+        if(is_null($data)){
+           return false;
+       }
+
+       return $data;
+   }
 
     public static function allCapa(){
          $data = self::where('type_img', 'cape')->get();

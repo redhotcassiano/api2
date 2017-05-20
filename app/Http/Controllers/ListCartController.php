@@ -54,7 +54,7 @@ class ListCartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
     }
 
     /**
@@ -65,6 +65,7 @@ class ListCartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $list = $this->list->deletarLista($id);
+        return $list;
     }
 }

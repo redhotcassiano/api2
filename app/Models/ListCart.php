@@ -49,4 +49,15 @@ class ListCart extends Model
 
     	return $this->belongsTo(Cart::class, 'cart_id');
     }
+
+    public function deletarLista($id){
+        $list = self::find($id);
+
+        if($list->delete()){
+          return $list;
+        }else{
+          return $list;
+        }
+
+    }
 }

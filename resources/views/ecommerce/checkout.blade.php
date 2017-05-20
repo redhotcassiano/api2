@@ -346,7 +346,7 @@
 													<div class="media-body">
 														<h3 class="media-title">@{{list.Tour.tours[0].title_tour}}</h3>
 														<h6 class="text-muted">Pipa - Natal</h6>
-														<a href="#Remove" class="text-muted remove-item-cart" ng-click="deleteList(list.id)">
+														<a href="#Remove" class="text-muted remove-item-cart" ng-click="deleteTour(list.id, list.price_total_tour)">
 															<i class="fa fa-times"></i>
 															<span>Remover</span>
 														</a>

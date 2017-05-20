@@ -12,7 +12,7 @@
 		};
 	}]);
 
-	angular.module('pag-produto').controller('pagProdutoController', function($scope, $http, tourService, ngNotify, ngDialog, toastr){
+	angular.module('pag-produto').controller('pagProdutoController', function($scope, $http, $timeout, tourService, ngNotify, ngDialog, toastr){
 		//Variaveis;
 
 		//Buscar a Localização do usuario;
@@ -45,12 +45,18 @@
 
 		$scope.carts = [];
 
+		$scope.waitSession = true;
+
 		$scope.name_user = "{{ $tourInfo->name_user }}";
 
 		$scope.email_user = "{{ $tourInfo->email_user }}";
 
 		$scope.avatar_user = "{{ $tourInfo->avatar_user }}";
 		// Fim das Variaveis;
+
+		$timeout(function(){
+	    $scope.waitSession = true;
+		}, 10000);
 
 		//popup
 		var clickToOpen = function () {
@@ -81,6 +87,22 @@
 			});
 
 		};
+
+		var saveView = function(title, url){
+			var view = [];
+				view['title_page'] = title;
+				view['url'] = url;
+
+			tourService.saveViews(title, url).then(function onSuccess(response){
+				$scope.carts = response.data;
+				//console.log($scope.carts);
+			}, function onError(response){
+				console.log(response.data + " erro: " + response.statusText);
+			});
+
+		};
+		var url = '{{url("tour")}}/{{  $tourInfo->slug_tour }}';
+	 saveView("{{$tourInfo->title_tour}}", url);
 
 		//Get Session;
 
@@ -113,7 +135,6 @@
 
 					//Atualiza o total do Carrinho;
 					updateTotalPrice(id, total);
-					//
 
 					ngNotify.set('O Passeio ' + tour['title'] +
 								 ' Foi Adicionado com Sucesso!<br>', {
@@ -149,9 +170,7 @@
 			listarCart({{ $tourInfo->cart[0]->id }});
 		};
 
-
-
-		//Buscar os comentarios do Tour;
+	//Buscar os comentarios do Tour;
 		$scope.ativarComment = false;
 		$scope.enviarComments = function(){
 			$scope.ativarComment = !$scope.ativarComment;

@@ -38,12 +38,25 @@ angular.module("pag-produto").factory('tourService',function($http) {
 			return $http.put('/web/cart/'+id+'/'+total);
 		},
 
+
 		cadastraTourCart: function(data){
 			return $http.post('/web/listcart', data);
 		},
 
 		getSession: function(name_session){
 			return $http.get('/session/get/'+name_session);
+		},
+
+		saveViews: function(title, url){
+
+			return $http.post('/web/views', {
+		    title_page: title,
+		    url: url
+		  }, {
+		    headers: {
+		      'Content-Type': 'application/json'
+		    }
+			});
 		},
 
 		getComments: function(idTour){
@@ -55,8 +68,10 @@ angular.module("pag-produto").factory('tourService',function($http) {
 		},
 
 		saveIpClient: function(name, data){
+
 			return $http.get('/session/save/'+name+'/'+data);
-		}
+		},
+
 	}
 
 });

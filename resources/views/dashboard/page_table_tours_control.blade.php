@@ -22,14 +22,15 @@
 	<script type="text/javascript" src="{{ url('assets/js/plugins/loaders/blockui.min.js') }}"></script>
 	<!-- /core JS files -->
 
-	<!-- Theme JS files -->	
+
+	<!-- Theme JS files -->
 	<script type="text/javascript" src="{{ url('assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
 
 	<script type="text/javascript" src="{{ url('assets/js/core/appscript.js') }}"></script>
-	
+
 	<!-- /theme JS files -->
 	<!-- include summernote css/js-->
-	
+
 	<!-- /theme JS files -->
 
 </head>
@@ -111,7 +112,7 @@
 										</div>
 									</div>
 
-									<div class="panel-body" ng-controller="pageToursController">
+									<div class="panel-body" ng-controller="dashAddTourController">
 										<div class="row">
 											<div class="col-md-10 col-md-offset-1">
 												<div class="input-group content-group">
@@ -128,8 +129,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">											
-											<div class="col-md-12">										
+										<div class="row">
+											<div class="col-md-12">
 
 												<div class="table-responsive">
 														<table class="table">
@@ -139,35 +140,29 @@
 																	<th class="col-lg-3">Titulo</th>
 																	<th class="col-lg-2">Preço</th>
 																	<th class="col-lg-2">Última Atualização</th>
-																	<th class="col-lg-2">Opções</th>																	
+																	<th class="col-lg-2">Opções</th>
 																</tr>
 															</thead>
-															<tbody ng-repeat="tour in tours">
-														        <tr>
-													                <td>Airi Satou (33)</td>
+															<tbody >
+														        <tr ng-repeat="tour in tours.tours">
+													                <td>
+																						<div ng-repeat="img in tours.imgs">
+																							<div ng-if="img.token_tour == tour.token_tour">
+																								<img src="{{url('/img')}}/@{{img.name}}" class="" alt="passeio natal" width="100" height="50" style="width: 50px !important;">
+
+																							</div>
+																						</div>
+																				</td>
 													                <td>@{{tour.title_tour}}</td>
 													                <td>R$ @{{tour.price_cost}}</td>
 													                <td>28/02/2017 por Ricardo</td>
 													                <td>
-																		<ul class="icons-list">
-																			<li class="text-primary-600"><a href="#"><i class="icon-pencil7"></i></a></li>
-																			<li class="text-danger-600"><a href="#"><i class="icon-trash"></i></a></li>
-																			<li class="text-teal-600"><a href="#"><i class="icon-cog7"></i></a></li>
-																		</ul>
-																	</td>
-													            </tr>
-													            <tr>
-													                <td>Airi Satou (33)</td>
-													                <td>Passeio Natal</td>
-													                <td>R$ 96.90</td>
-													                <td>28/02/2017 por Ricardo</td>
-													                <td>
-																		<ul class="icons-list">
-																			<li class="text-primary-600"><a href="#"><i class="icon-pencil7"></i></a></li>
-																			<li class="text-danger-600"><a href="#"><i class="icon-trash"></i></a></li>
-																			<li class="text-teal-600"><a href="#"><i class="icon-cog7"></i></a></li>
-																		</ul>
-																	</td>
+																					<ul class="icons-list">
+																						<li class="text-primary-600"><a href="dashboard/showedit/@{{tour.id}}"><i class="icon-pencil7"></i></a></li>
+																						<li class="text-danger-600"><a href="#deletar-tour" ng-click="desativarTour(tour.id, tour.status)"><i class="icon-lock" ng-show="@{{tour.status == 0}}"></i><i class="icon-unlocked" ng-show="@{{tour.status == 1}}"></i></a></li>
+																						<li class="text-teal-600"><a href="#em-breve"><i class="icon-cog7"></i></a></li>
+																					</ul>
+																				</td>
 													            </tr>
 												            </tbody>
 														</table>
@@ -179,16 +174,16 @@
 									</div>
 							</form>
 						</div>
-						
-	
+
+
 					</div>
 					<!-- /form centered -->
 
-										
+
 					<!-- Footer -->
 					<div class="footer text-muted">
 						&copy; 2017. <a href="#">Natal Praias</a> by <a href="https://everflyagencia.com.br" target="_blank">Everfly</a>
-					</div>					
+					</div>
 					<!-- /footer -->
 
 				</div>

@@ -85,7 +85,7 @@ angular.module("dashboard").controller('dashAddTourController', function($scope,
 				toursNew['kidsOk'] = 0;
 			}
 
-			if(seasonTour != null){				
+			if(seasonTour != null){
 					console.log(seasonTour);
 					//if(pSeason == "A"){
 							//$scope.btnSeasonA = false;
@@ -247,6 +247,32 @@ $scope.btnSeasonA = true;
 		});
 	}
  	banners();
+
+	//Deletar Tour;
+
+	$scope.desativarTour = function($id, $status){
+		toursService.desativar($id, $status).then(function onSuccess(response){
+			listarTours();
+			ngNotify.set('O Passeio foi desativado com sucesso!', {
+					position: 'top',
+					sticky: true,
+					type: 'success',
+					html: true
+
+			});
+
+		}, function onError(response){
+			console.log(response.data + " erro: " + response.statusText);
+			ngNotify.set('Erro ao desativar o Passeio.', {
+					position: 'top',
+					sticky: true,
+					type: 'error',
+					html: true
+
+			});
+		});
+
+	}
 
 
 });

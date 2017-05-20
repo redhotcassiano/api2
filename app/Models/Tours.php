@@ -13,7 +13,13 @@ class Tours extends Model
                             'about', 'questions', 'tips', 'price_cost', 'number_parcela', 'kidsOk', 'views'];
 
     public function allTours(){
-        return self::all();
+
+        $tour['tours'] = self::all();
+
+        $imgs = ImagesTours::allCapa();
+        $tour['imgs'] = $imgs;
+
+        return $tour ;
     }
 
     public function allToursNews(){
@@ -140,5 +146,19 @@ class Tours extends Model
         }else{
             return false;
         }
+    }
+
+    public function desativarTour($id, $status){
+
+          if($status == 1){
+            $newStatus = 0;
+          }else{
+            $newStatus = 1;
+          }
+
+          $tour = self::where('id', $id)
+                  ->update(['status' => $newStatus]);
+
+          return $newStatus;
     }
 }
