@@ -70,10 +70,10 @@ class PayController extends Controller
 
       $fields = array(
             'identificacao' => urlencode('zugno'),
-            'transId' => urlencode('1448224'),
-            'numPedido' => urlencode('3053'),
+            'transId' => urlencode('994430'),
+            'numPedido' => urlencode('1212121212'),
             // 'url_retorno' => urlencode('http://minhaurl.com'),
-            'retorno_tipo' => urlencode('xml')
+            'retorno_tipo' => urlencode('json')
       );
       $fields_string ='';
       foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }

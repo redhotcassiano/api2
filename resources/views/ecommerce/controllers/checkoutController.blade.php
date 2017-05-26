@@ -45,7 +45,6 @@
     			});
         }
 
-
         //Scopes Usados no Sistema;
 
         //popup
@@ -107,6 +106,22 @@
         $scope.plusPhone = function(){
           $scope.newPhone = $scope.newPhone + 1;
           console.log($scope.newPhone);
+        }
+
+        $scope.deleteTour = function(id, valor){
+          var total = $scope.cart[0].total_price - valor;
+          checkoutService.deleteTour(id).then(function onSuccess(response){
+            checkoutService.updatePriceCart($scope.cart[0].id, total).then(function onSuccess(response){
+
+            }, function onError(response){
+              console.log(response.data + "Erro:" + response.statusText);
+            });
+              listTours($scope.cart[0].id);
+
+          }, function onError(response){
+            console.log(response.data + " erro: " + response.statusText);
+
+          });
         }
 
     });

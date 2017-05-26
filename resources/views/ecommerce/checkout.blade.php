@@ -53,6 +53,9 @@
 	<link rel="stylesheet" type="text/css" href="{{ url('layout/js/vendors/angular-toastr/dist/angular-toastr.css') }}" />
 	<script type="text/javascript" src="{{ url('layout/js/vendors/angular-toastr/dist/angular-toastr.tpls.js') }}"></script>
 
+	<link rel="stylesheet" href="https://cdn.rawgit.com/codekraft-studio/angular-page-loader/master/dist/angular-page-loader.css">
+<script type="text/javascript" src="https://cdn.rawgit.com/codekraft-studio/angular-page-loader/master/dist/angular-page-loader.min.js"></script>
+
 	<!--- Controles -->
 
 	<script src="{{ url('layout/bower_components/angular-locale-pt-br/angular-locale_pt-br.js') }}"></script>
@@ -194,9 +197,15 @@
 	</form>
 	<!-- /advanced login -->
 </script>
+<style media="screen">
+	[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+		display: none !important;
+	}
+</style>
 
 </head>
-<body>
+<body ng-cloak>
+	<page-loader flag="isLoading" bg-color="whitesmoke"></page-loader>
 	<!-- Inicio do Header -->
 	<!-- Inicio do Header -->
 	<header>
@@ -346,7 +355,7 @@
 													<div class="media-body">
 														<h3 class="media-title">@{{list.Tour.tours[0].title_tour}}</h3>
 														<h6 class="text-muted">Pipa - Natal</h6>
-														<a href="#Remove" class="text-muted remove-item-cart" ng-click="deleteList(list.id)">
+														<a href="#Remove" class="text-muted remove-item-cart" ng-click="deleteTour(list.id, list.price_total_tour)">
 															<i class="fa fa-times"></i>
 															<span>Remover</span>
 														</a>
@@ -530,91 +539,105 @@
 						</div>
 
 					</div>
+					<div class="switch">
 
+					</div>
 					<div class="painel painel-default">
 						<div class="painel-body">
-							<form name="ccForm">
-								<div class="row">
-									<div class="number-card form-group">
-											 <div class="form-group">
-												 <label for="card-number">Número do Cartão</label>
-												 <input type="text" class="form-control" id="cardNumber" cc-format cc-number cc-eager-type name="ccNumber" ng-model="card.number" placeholder="xxxx xxxx xxxx xxxx">
-											 </div>
-									</div>
+							<a href="#boleto" ng-click="changerBoleto()">Pagar Com Boleto</a>
+							<a href="#cartao" ng-click="changerCartao()">Pagar Com Cartão</a>
+							<div class="card">
+								<form name="ccForm">
+									<div class="row">
+										<div class="number-card form-group">
+												 <div class="form-group">
+													 <label for="card-number">Número do Cartão</label>
+													 <input type="text" class="form-control" id="cardNumber" cc-format cc-number cc-eager-type name="ccNumber" ng-model="card.number" placeholder="xxxx xxxx xxxx xxxx">
+												 </div>
+										</div>
 
-									<div class="name-card form-group">
-										<label for="name-card">Titular do Cartão</label>
-										<input type="text" class="form-control" name="name-card" placeholder="Titular do Cartão" ng-model="ccForm.nameCard">
+										<div class="name-card form-group">
+											<label for="name-card">Titular do Cartão</label>
+											<input type="text" class="form-control" name="name-card" placeholder="Titular do Cartão" ng-model="ccForm.nameCard">
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="vaidate-card form-group">
+											<label for="validate-card" style="float: left; width: 100%;">Validade</label>
+											 <input style="width: 50%; float: left;" placeholder="MM" type="text" class="form-control" cc-exp-month name="ccExpMonth" ng-model="card.expiration.month">
+											 <input style="width: 50%; float: left;" placeholder="YY" type="text" class="form-control" cc-exp-year name="ccExpYear" ng-model="card.expiration.year">
+										</div>
+
+										<div class="cod-secure-card form-group">
+											<label for="cod-secure-card">Cód de segurança</label>
+											<input type="text" class="form-control" id="cvc" cc-cvc cc-type="ccForm.ccNumber.$ccType" name="cod-secure-card" ng-init="showVerso=false" ng-focus="showVerso = true" ng-blur="showVerso = false" ng-model="card.cvc" maxlength="4">
+										</div>
+
+										<div class="parcelas form-group">
+											<label for="parcelas">Número de parcelas</label><br>
+											<select name="parcelas" class="form-control" id="parcelas">
+												<option value="1">Á vista</option>
+												<option value="2">2x R$ 150,00</option>
+												<option value="3">3x R$ 75,60</option>
+												<option value="4">4x R$ 23,50</option>
+											</select>
+										</div>
+
+									</div>
+								</form>
+									<div class="row">
+										<div class="card-info">
+											<div class="card-front">
+												<div class="number-card" cc-format>
+													<span ng-show="card.number == null">0000 0000 0000 0000</span>
+													<span ng-show="card.number != null">@{{card.number}}</span> <br>
+													<span ng-show="card.expiration.month == null && card.expiration.year == null ">00/00</span>
+													<span ng-show="card.expiration.month != null && card.expiration.year != null ">@{{card.expiration.month}}/@{{card.expiration.year}}</span> <br>
+													<span ng-show="ccForm.nameCard == null">SEU NOME</span>
+													<span ng-show="ccForm.nameCard != null">@{{ccForm.nameCard}}</span>
+														<img src="{{ url('layout/img/visa.png') }}" style="float: right;" alt="visa" class="img-cards" width="45" ng-show="ccForm.ccNumber.$ccEagerType == 'Visa'">
+														<img src="{{ url('layout/img/master.png') }}" style="float: right;" alt="master-card" class="img-cards" width="45" ng-show="ccForm.ccNumber.$ccEagerType == 'MasterCard'">
+												</div>
+											</div>
+											<div class="card-back" style="display: block;" ng-show="showVerso">
+												<div class="cod-secure" style="margin-top: 80px; margin-left: 300px;">
+													<span ng-show="card.cvc == null">000</span>
+													<span ng-show="card.cvc != null">@{{card.cvc}}</span>
+												</div>
+											</div>
+										</div>
+										<div class="painel-total-venda">
+											<div class="row">
+												<div class="labels">
+													Subtotal<br>
+													Taxas<br>
+													Desconto<br><br>
+													Total<br>
+												</div>
+												<div class="values">
+													R$ 260,00<br>
+													R$ 0,00<br>
+													<span class="desc" ng-show="desconto != null">R$ @{{desconto | number: 2}}</span><br> <br>
+													<span class="desc" ng-show="desconto == null">R$ 0,00</span><br> <br>
+													<span class="total-painel" ng-show="total_validate == null">R$ @{{total_price | number: 2}}</span><br>
+													<span class="total-painel" ng-show="total_validate != null">R$ @{{total_validate | number: 2}}</span><br>
+												</div>
+											</div>
+											<div class="row">
+												<button class="btn btn-primary btn-block">Finalizar compra</button>
+											</div>
+										</div>
+									</div>
+							</div>
+							<div class="Painelboleto">
+								<div class="row">
+									<div class="col-md-12">
+										
 									</div>
 
 								</div>
-								<div class="row">
-									<div class="vaidate-card form-group">
-										<label for="validate-card" style="float: left; width: 100%;">Validade</label>
-										 <input style="width: 50%; float: left;" placeholder="MM" type="text" class="form-control" cc-exp-month name="ccExpMonth" ng-model="card.expiration.month">
-										 <input style="width: 50%; float: left;" placeholder="YY" type="text" class="form-control" cc-exp-year name="ccExpYear" ng-model="card.expiration.year">
-									</div>
-
-									<div class="cod-secure-card form-group">
-										<label for="cod-secure-card">Cód de segurança</label>
-										<input type="text" class="form-control" id="cvc" cc-cvc cc-type="ccForm.ccNumber.$ccType" name="cod-secure-card" ng-init="showVerso=false" ng-focus="showVerso = true" ng-blur="showVerso = false" ng-model="card.cvc" maxlength="4">
-									</div>
-
-									<div class="parcelas form-group">
-										<label for="parcelas">Número de parcelas</label><br>
-										<select name="parcelas" class="form-control" id="parcelas">
-											<option value="1">Á vista</option>
-											<option value="2">2x R$ 150,00</option>
-											<option value="3">3x R$ 75,60</option>
-											<option value="4">4x R$ 23,50</option>
-										</select>
-									</div>
-
-								</div>
-							</form>
-								<div class="row">
-									<div class="card-info">
-										<div class="card-front">
-											<div class="number-card" cc-format>
-												<span ng-show="card.number == null">0000 0000 0000 0000</span>
-												<span ng-show="card.number != null">@{{card.number}}</span> <br>
-												<span ng-show="card.expiration.month == null && card.expiration.year == null ">00/00</span>
-												<span ng-show="card.expiration.month != null && card.expiration.year != null ">@{{card.expiration.month}}/@{{card.expiration.year}}</span> <br>
-												<span ng-show="ccForm.nameCard == null">SEU NOME</span>
-												<span ng-show="ccForm.nameCard != null">@{{ccForm.nameCard}}</span>
-													<img src="{{ url('layout/img/visa.png') }}" style="float: right;" alt="visa" class="img-cards" width="45" ng-show="ccForm.ccNumber.$ccEagerType == 'Visa'">
-													<img src="{{ url('layout/img/master.png') }}" style="float: right;" alt="master-card" class="img-cards" width="45" ng-show="ccForm.ccNumber.$ccEagerType == 'MasterCard'">
-											</div>
-										</div>
-										<div class="card-back" style="display: block;" ng-show="showVerso">
-											<div class="cod-secure" style="margin-top: 80px; margin-left: 300px;">
-												<span ng-show="card.cvc == null">000</span>
-												<span ng-show="card.cvc != null">@{{card.cvc}}</span>
-											</div>
-										</div>
-									</div>
-									<div class="painel-total-venda">
-										<div class="row">
-											<div class="labels">
-												Subtotal<br>
-												Taxas<br>
-												Desconto<br><br>
-												Total<br>
-											</div>
-											<div class="values">
-												R$ 260,00<br>
-												R$ 0,00<br>
-												<span class="desc" ng-show="desconto != null">R$ @{{desconto | number: 2}}</span><br> <br>
-												<span class="desc" ng-show="desconto == null">R$ 0,00</span><br> <br>
-												<span class="total-painel" ng-show="total_validate == null">R$ @{{total_price | number: 2}}</span><br>
-												<span class="total-painel" ng-show="total_validate != null">R$ @{{total_validate | number: 2}}</span><br>
-											</div>
-										</div>
-										<div class="row">
-											<button class="btn btn-primary btn-block">Finalizar compra</button>
-										</div>
-									</div>
-								</div>
+							</div>
 
 						</div>
 					</div>

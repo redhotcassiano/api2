@@ -30,11 +30,15 @@ class ImagesToursController extends Controller
          return $this->images->getToken($token);
     }
 
+    public function getCapa($token){
+         return $this->images->getCapa($token);
+    }
+
     public function create(){
     	$file = $this->request->all();
     	$file_id = $file['formId'];
         $filetype = $file['fileType'];
-    	 	
+
 
     	$file_img = $this->request->file('file_data');
 
@@ -54,10 +58,10 @@ class ImagesToursController extends Controller
 	    	}
 	        return response($imgs, 200);
     	}
-    	
+
     	//return dd($filetype); //response(['response' => 'Opá Estamos indo bem! '.$this->request->all()], 200);
 
-    	
+
     }
 
     public function update($id){
@@ -65,6 +69,6 @@ class ImagesToursController extends Controller
     }
 
     public function destroy($id){
-    	
+
     }
 }

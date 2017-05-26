@@ -20,6 +20,7 @@
 	<!-- Controllers -->
 	<script src="{{ url('app/controllers/pageHomeController.js') }}"></script>
 	@include('dashboard/controllers/dashAddTourController')
+	@include('dashboard/controllers/editToursController')
 
 
 <!-- /Angular Js -->

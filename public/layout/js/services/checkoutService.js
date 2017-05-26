@@ -23,6 +23,10 @@ angular.module("checkout").factory('checkoutService',function($http) {
 
 		validateCupon: function(cupon){
 			return $http.get('/v1/cupons/validate/'+cupon);
+		},
+
+		deleteTour: function(id){
+			return $http.get('/web/listcart/'+id);
 		}
 
 	}

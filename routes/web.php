@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +64,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function(){
 		return view ('dashboard/page_table_tours_control');
 	});
 
+	Route::get('tours/edit/{id}', 'DashboardController@editTour');
+
+	Route::get('tour/showedit/{id}', function($id){
+		return View::make('dashboard/page_editTours')->with(array('id' => $id));
+	});
+
 	Route::get('addtours', function(){
 		$scriptpage = url('assets/js/pages/dashboard.js');
 		$codRand = rand(10, 99999999999);
@@ -95,6 +100,7 @@ Route::group(['prefix' => 'v1'], function(){
 	Route::post('tours', 'ToursController@create');
 	Route::put('tours/{id}', 'ToursController@update');
 	Route::delete('tours/{id}', 'ToursController@destroy');
+	Route::get('tours/desativar/{id}/{status}', 'ToursController@desativarTour');
 
 	//category
 	Route::get('category', 					'CategoryController@index');
@@ -192,7 +198,7 @@ Route::group(['prefix' => 'web'], function(){
 	Route::get('listcart/{id}', 'ListCartController@show');
 	Route::post('listcart', 'ListCartController@create');
 	Route::put('listcart/{id}', 'ListCartController@update');
-	Route::delete('listcart/{id}', 'ListCartController@destroy');
+	Route::get('listcart/{id}', 'ListCartController@destroy');
 
 	//Comentario;
 
@@ -209,5 +215,10 @@ Route::group(['prefix' => 'web'], function(){
 	//Sistema;
 	Route::get('sistem', 'SistemController@index');
 	Route::post('sistem', 'SistemController@create');
+
+	//VIews;
+	Route::get('views', 'ViewsRelatoryController@index');
+	Route::get('views/{id}', 'ViewsRelatoryController@getView');
+	Route::post('views', 'ViewsRelatoryController@save');
 
 });

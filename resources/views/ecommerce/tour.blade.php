@@ -6,16 +6,16 @@
 	<title>Natal Praias - {{ $tourInfo->title_tour }}</title>
 	<!--<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">-->
 	<link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ url('layout/css/animate.css') }}">
+	<link rel="stylesheet" href="{{ url('layout/css/owlcarousel/assets/owl.theme.default.min.css') }}">
+  <link rel="stylesheet" href="{{ url('layout/css/animate.css') }}">
 	<link rel="stylesheet" href="{{ url('layout/css/plugins.css') }}">
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/pickadate/lib/compressed/themes/classic.css') }}">
 	<link rel="stylesheet" href="{{ url('layout/js/vendors/pickadate/lib/compressed/themes/classic.date.css') }}">
 	<!--<link rel="stylesheet" href="css/ferramentas/badget.css"> -->
 
 	<script src="{{ url('layout/js/vendors/jquery.min.js') }}"></script>
-    <script src="{{ url('layout/css/owlcarousel/owl.carousel.js') }}"></script>
-    <script src="{{ url('layout/js/vendors/pickadate/lib/compressed/legacy.js') }}"></script>
+  <script src="{{ url('layout/css/owlcarousel/owl.carousel.js') }}"></script>
+  <script src="{{ url('layout/js/vendors/pickadate/lib/compressed/legacy.js') }}"></script>
 	<script src="{{ url('layout/js/vendors/pickadate/lib/picker.js') }}"></script>
 	<script src="{{ url('layout/js/vendors/pickadate/lib/compressed/picker.date.js') }}"></script>
     <!-- Angular Material requires Angular.js Libraries -->
@@ -148,7 +148,29 @@
 	        background-size: 22px;
 	    }
 
+			body > .inner {
+			  display: none;
+			}
 
+			body.pg-loaded > .inner {
+			  display: block;
+			}
+
+			.wait{
+				background-color: #fff;
+				width: 100%;
+				height: 100%;
+				z-index: 999999;
+				position: absolute;
+				opacity: 100%;
+			}
+
+			.wait img{
+					margin: 0 auto;
+					width: 190px;
+					margin-left: 45%;
+					margin-top: 20%;
+			}
 
 	</style>
 
@@ -227,8 +249,17 @@
 			<!-- /advanced login -->
 		</script>
 
+
 </head>
 <body>
+	<div id="wait" class="wait" ng-hide="waitSession">
+		<div class="row">
+			<div class="col-md-12">
+				<img src="{{ url('layout/img/logo_natalpraias.png') }}" alt="Natal Praias">
+			</div>
+		</div>
+	</div>
+
 	@include('ecommerce/parts/header')
 	<!-- Inicio do Main -->
 	<main>
@@ -241,7 +272,7 @@
 
 					<!-- ************* -->
 					<div class="links-pages">
-						<p><a href="#">Home</a>/<a href="#">Passeios</a>/{{ $tourInfo->title_tour }}</p>
+						<p><a href="{{ url("loja") }}">Home</a>/<a href="#">Passeios</a>/{{ $tourInfo->title_tour }}</p>
 					</div>
 					<!-- Carousel -->
 					<div class="carrousel-passeios">
@@ -496,11 +527,9 @@
 									4,5
 								</div>
 								<div class="stars-avaliacoes">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
+									<div class="stars">
+										<div ng-rate-it ng-init="model.readonly = commentTour.stars_share" ng-model="model.readonly" read-only="commentTour.stars_share" star-width="22" star-height="22"></div>
+									</div>
 									<p>Nota com base na avaliação de <b>37 viajantes</b></p>
 								</div>
 							</div>
@@ -635,7 +664,7 @@
 						<span class="valor-secund">R$ @{{valor1 = price * countAdult | number: 2}}</span>
 					</div>
 					<div class="coluna-peq text-right">
-						<i class="fa fa-minus spin-minus text-info" ng-init="countAdult = 1" ng-click="countAdult = countAdult - 1" ></i>
+						<i class="fa fa-minus spin-minus text-info" ng-init="countAdult = 1" ng-click="countAdult = countAdult - 1"  ng-show="countAdult > 1"></i>
 						<!--<button ng-init="countAdult = 1" ng-click="countAdult = countAdult - 1">-</button>-->
 						<input type="text" class="input-price-info" value="@{{tour.count_adulto = countAdult}}" ng-model="tour.count_adulto">
 						<i class="fa fa-plus spin-minus text-info disabled" ng-init="countAdult = 1" ng-click="countAdult = countAdult + 1" ng-model="tour.countAdult"></i>
@@ -650,9 +679,9 @@
 						<span class="valor-secund">R$ @{{valor2 = price / 2 * contCrian | number: 2}}</span>
 					</div>
 					<div class="coluna-peq text-right">
-						<i class="fa fa-minus spin-minus text-info" ng-init="contCrian = 0" ng-click="contCrian = contCrian - 1"></i>
+						<i class="fa fa-minus spin-minus text-info" ng-init="contCrian = 0" ng-click="contCrian = contCrian - 1" ng-show="contCrian >= 1"></i>
 						<!--<button ng-init="countAdult = 1" ng-click="countAdult = countAdult - 1">-</button>-->
-						<input type="text" class="input-price-info" value="@{{tour.count_crianca = contCrian}}">
+						<input type="text" class="input-price-info" value="@{{tour.count_crianca = contCrian}}" ng-model="tour.count_crianca">
 						<i class="fa fa-plus spin-minus text-info disabled" ng-init="contCrian = 0" ng-click="contCrian = contCrian + 1" ng-model="tour.count_crianca"></i>
 						<!-- <button ng-init="countAdult = 1" ng-click="countAdult = countAdult + 1">+</button> -->
 					</div>
@@ -663,9 +692,9 @@
 						<span class="valor-secund">Grátis</span>
 					</div>
 					<div class="coluna-peq text-right">
-						<i class="fa fa-minus spin-minus text-info" ng-init="contInfa = 0" ng-click="contInfa = contInfa - 1"></i>
+						<i class="fa fa-minus spin-minus text-info" ng-init="contInfa = 0" ng-click="contInfa = contInfa - 1" ng-show="contInfa >= 1"></i>
 						<!--<button ng-init="countAdult = 1" ng-click="countAdult = countAdult - 1">-</button>-->
-						<input type="text" class="input-price-info"  value="@{{tour.count_infantil = contInfa}}">
+						<input type="text" class="input-price-info"  value="@{{tour.count_infantil = contInfa}}" ng-model="contInfa" >
 						<i class="fa fa-plus spin-minus text-info disabled" ng-init="contInfa = 0" ng-click="contInfa = contInfa + 1" ng-model="tour.count_infantil"></i>
 						<!-- <button ng-init="countAdult = 1" ng-click="countAdult = countAdult + 1">+</button> -->
 					</div>
@@ -679,7 +708,6 @@
 					<div class="coluna-peq">
 						<span class="valor-total-label text-right" ng-model="tour.price_total_tour">R$ @{{tour.price_total_tour = valor1 + valor2 | number: 2}}</span>
 					</div>
-
 				</div>
 			</div>
 			<!-- Botão de Add ao Carrinho -->
@@ -687,6 +715,8 @@
 				<input type="hidden" value="@{{tour.tour_id = tour_id}}" ng-init="tour_id = {{ $tourInfo->id }}" ng-model="tour.tour_id">
 				<input type="hidden" value="@{{tour.cart_id = cart}}" ng-init="cart = {{ $tourInfo->cart[0]->id }}" ng-model="tour.cart_id">
 				<input type="hidden" value="@{{tour.title = title_tour}}" ng-init="title_tour = '{{ $tourInfo->title_tour }}'" ng-model="tour.title">
+				<input type="hidden" value="@{{tour.price_total_adult = valor1}}" ng-model="tour.price_total_adult">@{{tour.price_total_adult}}
+				<input type="hidden" value="@{{tour.price_total_crian = valor2}}" ng-model="tour.price_total_crian">
 				<button class="btn btn-primary btn-block btn-add-shopcar" ng-click="addListCart(tour)"><i class="fa fa-shopping-cart"></i>Adicionar ao Carrinho</button>
 
 			</div>
@@ -805,6 +835,7 @@
 		picker.$root.attr('aria-hidden','false');
 
 	</script>
+
 	<script src="{{ url('layout/js/scripts.js') }}"></script>
 	<script src="{{ url('layout/js/vendors/bootstrap.js') }}"></script>
 

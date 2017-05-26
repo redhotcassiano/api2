@@ -101,7 +101,7 @@ class Cart extends Model
         if($cart){
             return $cart;
         }else{
-            return false;
+            return "false";
         }
     }
 
