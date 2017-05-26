@@ -23,8 +23,6 @@ class CheckoutController extends Controller
 
     }
 
-
-
     public function index(){
       $user = false;
       $user['init'] = "test";
@@ -62,7 +60,7 @@ class CheckoutController extends Controller
 
       for ($i=0; $i < $result->count() ; $i++) {
           $result[$i]['Tour'] = $this->tours->allToursCart($result[$i]['tour_id']);
-      }     
+      }
 
       if(is_null($result)){
         return response(['response' => 'Não foi encontrado nenhum passeio'], 400);
@@ -75,13 +73,6 @@ class CheckoutController extends Controller
         $tours = $this->tours->allToursCart($id);
         return $tours;
     }
-
-    public function validateCupon($cupon){
-
-    }
-
-
-
 
 
 }

@@ -45,7 +45,6 @@
     			});
         }
 
-
         //Scopes Usados no Sistema;
 
         //popup
